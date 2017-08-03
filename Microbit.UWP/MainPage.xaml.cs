@@ -127,6 +127,7 @@ namespace Microbit.UWP
                 response = await client.PostAsync(uri, content);
                 responseContent = response.Content.ReadAsStringAsync().Result;
 
+                this.tblResults.Text = "正在识别处理...";
                 var result = JsonConvert.DeserializeObject<List<Models.EmotionModel>>(responseContent);
                 foreach (var item in result)
                 {
@@ -153,7 +154,8 @@ namespace Microbit.UWP
             {
                 var services = device.Services;
 
-                Frame.Navigate(typeof(Views.DeviceSensorPage), e.AddedItems[0]);
+                var selectItem = e.AddedItems[0];
+                Frame.Navigate(typeof(Views.DeviceSensorPage), selectItem);
             }
 
             string.Format("Pairing result = " + dpr.Status.ToString());
