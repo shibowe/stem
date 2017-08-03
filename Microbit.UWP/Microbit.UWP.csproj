@@ -102,7 +102,16 @@
     <Compile Include="Models\FaceRectangleModel.cs" />
     <Compile Include="Models\ScoresModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\AccelerationSensorService.cs" />
     <Compile Include="Services\DisplayServices.cs" />
+    <Compile Include="Services\PressureSensorService.cs" />
+    <Compile Include="Services\SensorBase.cs" />
+    <Compile Include="Services\SensorUUIDs.cs" />
+    <Compile Include="Services\TemperatureSensorService.cs" />
+    <Compile Include="ViewModels\SensorsViewModel.cs" />
+    <Compile Include="Views\DeviceSensorPage.xaml.cs">
+      <DependentUpon>DeviceSensorPage.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
@@ -129,6 +138,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Views\DeviceSensorPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
@@ -137,13 +150,18 @@
     <PackageReference Include="Microsoft.ProjectOxford.Emotion">
       <Version>1.0.336</Version>
     </PackageReference>
+    <PackageReference Include="Microsoft.Toolkit.Uwp">
+      <Version>1.5.1</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Toolkit.Uwp.UI">
+      <Version>1.5.1</Version>
+    </PackageReference>
     <PackageReference Include="Newtonsoft.Json">
       <Version>10.0.3</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Controls\" />
-    <Folder Include="Views\" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>

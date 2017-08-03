@@ -27,6 +27,7 @@ using Windows.Devices.Bluetooth;
 using Windows.Devices.Bluetooth.GenericAttributeProfile;
 
 using Microbit.UWP.Services;
+using Microsoft.Toolkit.Uwp;
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
 namespace Microbit.UWP
@@ -40,6 +41,7 @@ namespace Microbit.UWP
         StringBuilder strUUID = new StringBuilder();
         ObservableCollection<DeviceInformation> deviceList = new ObservableCollection<DeviceInformation>();
 
+        ObservableBluetoothLEDevice device;
 
         private TypedEventHandler<DeviceWatcher, DeviceInformation> handlerAdded = null;
         private TypedEventHandler<DeviceWatcher, DeviceInformationUpdate> handlerUpdated = null;
@@ -75,7 +77,108 @@ namespace Microbit.UWP
 
         private void BtnDevicePicker_Click(object sender, RoutedEventArgs e)
         {
+
+        }
+
+        #region Emotion API
+        private async void BtnInvokeAPI_Click(object sender, RoutedEventArgs e)
+        {
+            var picker = new Windows.Storage.Pickers.FileOpenPicker();
+            picker.ViewMode = Windows.Storage.Pickers.PickerViewMode.Thumbnail;
+            picker.SuggestedStartLocation = Windows.Storage.Pickers.PickerLocationId.PicturesLibrary;
+            picker.FileTypeFilter.Add(".jpg");
+            picker.FileTypeFilter.Add(".jpeg");
+            picker.FileTypeFilter.Add(".png");
+
+            Windows.Storage.StorageFile file = await picker.PickSingleFileAsync();
+            if (null != file)
+            {
+
+                using (var inputStream = await file.OpenSequentialReadAsync())
+                {
+                    var readStream = inputStream.AsStreamForRead();
+                    byte[] byteArray = new byte[readStream.Length];
+
+                    await readStream.ReadAsync(byteArray, 0, byteArray.Length);
+
+                    MakeRequest(file.Path.Trim(), byteArray);
+                }
+            }
+            else
+            {
+                this.tblResults.Text = "没有选择任何文件";
+            }
+
+        }
+
+        private async void MakeRequest(string imagePath, byte[] byteData)
+        {
+            var client = new HttpClient();
+
+            client.DefaultRequestHeaders.Add("Ocp-Apim-Subscription-Key", "9c1e3b2860d8440c981ff1077c4cb6c2");
+
+            string uri = "https://api.cognitive.azure.cn/emotion/v1.0/recognize?";
+            HttpResponseMessage response;
+            string responseContent;
+
+            using (var content = new ByteArrayContent(byteData))
+            {
+                content.Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream");
+                response = await client.PostAsync(uri, content);
+                responseContent = response.Content.ReadAsStringAsync().Result;
+
+                var result = JsonConvert.DeserializeObject<List<Models.EmotionModel>>(responseContent);
+                foreach (var item in result)
+                {
+                    this.tblResults.Text = "惊喜值:" + item.Scores.surprise.ToString();
+                }
+            }
+        }
+        #endregion
+
+
+        #region Bluetooth LE Paire and Unpaire
+        private async void resultsListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            resultsListView.IsEnabled = false;
+            string.Format("Pairing started. Please wait...");
+
+            DeviceInformationDisplay deviceInfoDisp = resultsListView.SelectedItem as DeviceInformationDisplay;
+
+            DevicePairingResult dpr = await deviceInfoDisp.DeviceInformation.Pairing.PairAsync();
+            device = new ObservableBluetoothLEDevice(deviceInfoDisp.DeviceInformation);
+            await device.ConnectAsync();
+
+            if (device.IsPaired)
+            {
+                var services = device.Services;
+
+                Frame.Navigate(typeof(Views.DeviceSensorPage), e.AddedItems[0]);
+            }
+
+            string.Format("Pairing result = " + dpr.Status.ToString());
+            resultsListView.IsEnabled = true;
+        }
+
+        private async void BtnUnpairDevice_Click(object sender, RoutedEventArgs e)
+        {
+
+            DeviceInformationDisplay deviceInfoDisp = resultsListView.SelectedItem as DeviceInformationDisplay;
+
+            DeviceUnpairingResult dupr = await deviceInfoDisp.DeviceInformation.Pairing.UnpairAsync();
+
+            this.tblResults.Text = string.Format("Unpairing result = " + dupr.Status.ToString());
+        }
+        #endregion
+
+        private void selectorComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
             ResultCollection.Clear();
+
+            if (selectorComboBox.SelectedIndex == 0)
+            {
+                return;
+            }
 
             DeviceSelectorInfo deviceSelectorInfo = (DeviceSelectorInfo)selectorComboBox.SelectedItem;
 
@@ -179,89 +282,5 @@ namespace Microbit.UWP
             this.tblResults.Text = "Starting Watcher...";
             deviceWatcher.Start();
         }
-
-        #region Emotion API
-        private async void BtnInvokeAPI_Click(object sender, RoutedEventArgs e)
-        {
-            var picker = new Windows.Storage.Pickers.FileOpenPicker();
-            picker.ViewMode = Windows.Storage.Pickers.PickerViewMode.Thumbnail;
-            picker.SuggestedStartLocation = Windows.Storage.Pickers.PickerLocationId.PicturesLibrary;
-            picker.FileTypeFilter.Add(".jpg");
-            picker.FileTypeFilter.Add(".jpeg");
-            picker.FileTypeFilter.Add(".png");
-
-            Windows.Storage.StorageFile file = await picker.PickSingleFileAsync();
-            if (null != file)
-            {
-
-                using (var inputStream = await file.OpenSequentialReadAsync())
-                {
-                    var readStream = inputStream.AsStreamForRead();
-                    byte[] byteArray = new byte[readStream.Length];
-
-                    await readStream.ReadAsync(byteArray, 0, byteArray.Length);
-
-                    MakeRequest(file.Path.Trim(), byteArray);
-                }
-            }
-            else
-            {
-                this.tblResults.Text = "没有选择任何文件";
-            }
-
-        }
-
-        private async void MakeRequest(string imagePath, byte[] byteData)
-        {
-            var client = new HttpClient();
-
-            client.DefaultRequestHeaders.Add("Ocp-Apim-Subscription-Key", "9c1e3b2860d8440c981ff1077c4cb6c2");
-
-            string uri = "https://api.cognitive.azure.cn/emotion/v1.0/recognize?";
-            HttpResponseMessage response;
-            string responseContent;
-
-            using (var content = new ByteArrayContent(byteData))
-            {
-                content.Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream");
-                response = await client.PostAsync(uri, content);
-                responseContent = response.Content.ReadAsStringAsync().Result;
-
-                var result = JsonConvert.DeserializeObject<List<Models.EmotionModel>>(responseContent);
-                foreach (var item in result)
-                {
-                    this.tblResults.Text = "惊喜值:" + item.Scores.surprise.ToString();
-                }
-            }
-        }
-        #endregion
-
-
-        #region Bluetooth LE Paire and Unpaire
-        private async void resultsListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            resultsListView.IsEnabled = false;
-            string.Format("Pairing started. Please wait...");
-
-            DeviceInformationDisplay deviceInfoDisp = resultsListView.SelectedItem as DeviceInformationDisplay;
-
-            DevicePairingResult dpr = await deviceInfoDisp.DeviceInformation.Pairing.PairAsync();
-
-            string.Format(
-                "Pairing result = " + dpr.Status.ToString());
-            resultsListView.IsEnabled = true;
-        }
-
-        private async void BtnUnpairDevice_Click(object sender, RoutedEventArgs e)
-        {
-
-            DeviceInformationDisplay deviceInfoDisp = resultsListView.SelectedItem as DeviceInformationDisplay;
-
-            DeviceUnpairingResult dupr = await deviceInfoDisp.DeviceInformation.Pairing.UnpairAsync();
-
-            this.tblResults.Text = string.Format(
-                  "Unpairing result = " + dupr.Status.ToString());
-        }
-        #endregion 
     }
 }
