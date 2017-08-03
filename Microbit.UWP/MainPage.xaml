@@ -55,7 +55,7 @@
                     Click="BtnInvokeAPI_Click"
                     Content="选择图片并识别" />
             <TextBlock x:Name="tblResultsTitle" Margin="24,6" FontSize="16.666" Text="识别结果:"/>
-            <TextBlock x:Name="tblResults" TextWrapping="Wrap" Margin="0,6"  Text="" />
+            <TextBlock x:Name="tblResults" Foreground="Green" TextWrapping="Wrap" Margin="0,6"  Text="" />
         </StackPanel>
         <Border BorderBrush="AntiqueWhite" Grid.Row="2" Background="#F3F3F3" Margin="12"  BorderThickness="1"/>
 
