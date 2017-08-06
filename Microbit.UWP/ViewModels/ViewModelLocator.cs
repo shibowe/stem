@@ -42,5 +42,7 @@ namespace Microbit.UWP.ViewModels
         public DevicePageViewModel DPVM => ServiceLocator.Current.GetInstance<DevicePageViewModel>();
         public MainPageViewModel MPVM => ServiceLocator.Current.GetInstance<MainPageViewModel>();
 
+
+
     }
 }
