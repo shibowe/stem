@@ -191,12 +191,32 @@ namespace Microbit.UWP.ViewModels
         public RelayCommand<object> GetDeviceInfoCommmand => _getDeviceInfoCommmand ?? (
             _getDeviceInfoCommmand = new RelayCommand<object>((s) =>
             {
-                GetDeviceInfo(s);
+                if (null != s)
+                {
+                    GetDeviceInfo(s);
+                }
             }));
 
-        private void GetDeviceInfo(object obj)
+        private async void GetDeviceInfo(object obj)
         {
-            var device = obj;
+            // Do not allow a new Pair operation to start if an existing one is in progress.
+            if (isBusy)
+            {
+                return;
+            }
+
+            isBusy = true;
+            StatusContent = "Pairing started. Please wait...";
+            // Capture the current selected item in case the user changes it while we are pairing.
+            var bleDeviceDisplay = obj as DeviceModel;
+
+            // BT_Code: Pair the currently selected device.
+            DevicePairingResult result = await bleDeviceDisplay.DeviceInformation.Pairing.PairAsync();
+
+            StatusContent = $"Pairing result = { result.Status}";
+
+            isBusy = false;
+
         }
 
     }
