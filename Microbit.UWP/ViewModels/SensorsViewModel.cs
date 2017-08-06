@@ -21,6 +21,7 @@ namespace Microbit.UWP.ViewModels
         DeviceInformation device;
         BluetoothLEDevice leDevice;
 
+
         public SensorsViewModel(DeviceInformation info)
         {
             this.device = info;
