@@ -35,7 +35,7 @@ namespace Microbit.UWP.ViewModels
 
             //set viewmodels for each page
             SimpleIoc.Default.Register<MainPageViewModel>();
-            SimpleIoc.Default.Register<DevicePageViewModel>();
+            SimpleIoc.Default.Register<DevicePageViewModel>(true);
 
         }
         //define the viewmodel as properties for each page

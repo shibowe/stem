@@ -9,6 +9,9 @@ using System.Threading.Tasks;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Views;
 using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.Messaging;
+
+using Microbit.UWP.Models;
 
 namespace Microbit.UWP.ViewModels
 {
@@ -21,6 +24,23 @@ namespace Microbit.UWP.ViewModels
         {
             _dialogService = dialogService;
             _navigate = navigation;
+
+            Messenger.Default.Register<DeviceModel>(this, (obj) =>
+            {
+                DeviceName = obj.Name;
+            });
+
+        }
+
+        private string _deviceName;
+        public string DeviceName
+        {
+            get { return _deviceName; }
+            set
+            {
+                Set(ref _deviceName, value);
+                RaisePropertyChanged(nameof(DeviceName));
+            }
         }
     }
 }

@@ -17,12 +17,12 @@
 
             <Style x:Key="MainPageHeaderStyle" TargetType="StackPanel">
                 <Setter Property="Background" Value="{ThemeResource MainColorBrush}"/>
-                <Setter Property="MinHeight" Value="160"/>
+                <Setter Property="MinHeight" Value="140"/>
                 <Setter Property="Padding" Value="24"/>
             </Style>
             <Style x:Key="MainPageHeaderTitleStyle" TargetType="TextBlock">
                 <Setter Property="Foreground" Value="White"/>
-                <Setter Property="Margin" Value="0,110,0,0"/>
+                <Setter Property="Margin" Value="0,90,0,0"/>
                 <Setter Property="FontSize" Value="20.666"/>
             </Style>
 

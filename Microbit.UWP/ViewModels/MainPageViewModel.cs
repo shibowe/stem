@@ -14,6 +14,7 @@ using GalaSoft.MvvmLight.Command;
 using Microbit.UWP.Models;
 using Microbit.UWP.Services;
 using GalaSoft.MvvmLight.Threading;
+using GalaSoft.MvvmLight.Messaging;
 
 namespace Microbit.UWP.ViewModels
 {
@@ -186,6 +187,7 @@ namespace Microbit.UWP.ViewModels
         }
         #endregion
 
+        #region Pairing Devices
         private bool isBusy = false;
         private RelayCommand<object> _getDeviceInfoCommmand;
         public RelayCommand<object> GetDeviceInfoCommmand => _getDeviceInfoCommmand ?? (
@@ -193,6 +195,7 @@ namespace Microbit.UWP.ViewModels
             {
                 if (null != s)
                 {
+
                     GetDeviceInfo(s);
                 }
             }));
@@ -206,18 +209,29 @@ namespace Microbit.UWP.ViewModels
             }
 
             isBusy = true;
-            StatusContent = "Pairing started. Please wait...";
+            StatusContent = "正在配对中,请稍等...";
             // Capture the current selected item in case the user changes it while we are pairing.
             var bleDeviceDisplay = obj as DeviceModel;
 
-            // BT_Code: Pair the currently selected device.
-            DevicePairingResult result = await bleDeviceDisplay.DeviceInformation.Pairing.PairAsync();
+            if (bleDeviceDisplay.IsPaired.Contains("未配对"))
+            {
+                // BT_Code: Pair the currently selected device.
+                DevicePairingResult result = await bleDeviceDisplay.DeviceInformation.Pairing.PairAsync();
 
-            StatusContent = $"Pairing result = { result.Status}";
+                StatusContent = $"配对结果 = {result.Status}";
 
-            isBusy = false;
+                isBusy = false;
+            }
+            else
+            {
+                Messenger.Default.Send(bleDeviceDisplay);
+                _navigate.NavigateTo("DevicePage", bleDeviceDisplay);
+            }
+
+
 
         }
+        #endregion 
 
     }
 }

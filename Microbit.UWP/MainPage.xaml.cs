@@ -45,20 +45,16 @@ namespace Microbit.UWP
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
+            SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = Frame.CanGoBack
+             ? AppViewBackButtonVisibility.Visible
+             : AppViewBackButtonVisibility.Collapsed;
+
             base.OnNavigatedFrom(e);
         }
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = AppViewBackButtonVisibility.Collapsed;
-
-        }
-        protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)
-        {
-            SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = Frame.CanGoBack
-              ? AppViewBackButtonVisibility.Visible
-              : AppViewBackButtonVisibility.Collapsed;
-
-            base.OnNavigatingFrom(e);
+            base.OnNavigatedTo(e);
         }
 
         #region Emotion API
