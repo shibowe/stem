@@ -42,5 +42,14 @@ namespace Microbit.UWP.Services
                 await statusbar.ShowAsync();
             }
         }
+        public static void ShowTitleBar()
+        {
+            var titleBar = Windows.UI.ViewManagement.ApplicationView.GetForCurrentView().TitleBar;
+            titleBar.BackgroundColor = ColorHelper.FromArgb(255, 70, 84, 158);
+            titleBar.ButtonBackgroundColor = ColorHelper.FromArgb(255, 70, 84, 158);
+            titleBar.ButtonBackgroundColor = ColorHelper.FromArgb(255, 70, 84, 158);
+            titleBar.ButtonInactiveForegroundColor = Colors.White;
+
+        }
     }
 }

@@ -58,6 +58,7 @@ namespace Microbit.UWP
                 }
 
                 AppUIService.ShowStatusBar();
+                AppUIService.ShowTitleBar();
 
                 // Place the frame in the current Window
                 Window.Current.Content = rootFrame;
