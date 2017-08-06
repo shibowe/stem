@@ -23,7 +23,7 @@
         </StackPanel>
         <ScrollViewer Grid.Row="1" Style="{StaticResource MainPageContentStyle}">
             <ListView x:Name="lvDevices"
-                      ItemsSource="{Binding ResultCollection,Mode=OneWay}"
+                      ItemsSource="{Binding ResultCollection,Mode=TwoWay}"
                   Style="{StaticResource MainPageDeviceListStyle}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
@@ -48,8 +48,8 @@
             </ListView>
         </ScrollViewer>
         <Border x:Name="StatusBorder" Grid.Row="2" Margin="0">
-            <ScrollViewer VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto" MaxHeight="20">
-                <TextBlock x:Name="StatusBlock" FontWeight="Bold" Margin="24,6" 
+            <ScrollViewer VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto" FontSize="10" MaxHeight="20">
+                <TextBlock x:Name="StatusBlock" Margin="24,6" 
                            Text="{Binding StatusContent}"
                            MaxWidth="{Binding ElementName=lvDevices,Path=ActualWidth}" 
                            TextWrapping="Wrap"/>

@@ -11,8 +11,8 @@
             <!--  图标字体  -->
             <FontFamily x:Key="IconFont">/Assets/iconfont.ttf#iconfont</FontFamily>
             
-            <Color x:Key="MainAccentColor">#46549E</Color>
-            <Color x:Key="NormalTextColor">#FFF2F2F2</Color>
+            <Color x:Key="MainAccentColor">#FF46549E</Color>
+            <Color x:Key="NormalTextColor">#FF46549E</Color>
             <SolidColorBrush x:Key="MainColorBrush" Color="{ThemeResource MainAccentColor}" />
 
             <Style x:Key="MainPageHeaderStyle" TargetType="StackPanel">

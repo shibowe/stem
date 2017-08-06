@@ -23,7 +23,6 @@ namespace Microbit.UWP.ViewModels
 
         private IDialogService _dialogService;
         private INavigationService _navigate;
-        public ObservableCollection<BluetoothLEDeviceDisplay> ResultCollection = new ObservableCollection<BluetoothLEDeviceDisplay>();
 
         public MainPageViewModel(IDialogService dialogService, INavigationService navigation)
         {
@@ -42,6 +41,16 @@ namespace Microbit.UWP.ViewModels
             {
                 Set(ref _statusContent, value);
                 RaisePropertyChanged(nameof(StatusContent));
+            }
+        }
+        private ObservableCollection<DeviceModel> _resultCollection = new ObservableCollection<DeviceModel>();
+        public ObservableCollection<DeviceModel> ResultCollection
+        {
+            get { return _resultCollection; }
+            set
+            {
+                _resultCollection = value;
+                RaisePropertyChanged(nameof(ResultCollection));
             }
         }
 
@@ -113,7 +122,7 @@ namespace Microbit.UWP.ViewModels
                 // Protect against race condition if the task runs after the app stopped the deviceWatcher.
                 if (sender == deviceWatcher)
                 {
-                    StatusContent = ResultCollection.Count + "devices found. Enumeration completed.";
+                    StatusContent = ResultCollection.Count() + "devices found. Enumeration completed.";
                 }
             });
         }
@@ -123,16 +132,16 @@ namespace Microbit.UWP.ViewModels
             await DispatcherHelper.RunAsync(() =>
             {
                 // Find the corresponding DeviceInformation in the collection and remove it.
-                BluetoothLEDeviceDisplay bleDeviceDisplay = FindBluetoothLEDeviceDisplay(args.Id);
+                DeviceModel bleDeviceDisplay = FindBluetoothLEDeviceDisplay(args.Id);
                 if (bleDeviceDisplay != null)
                 {
                     ResultCollection.Remove(bleDeviceDisplay);
                 }
             });
         }
-        private BluetoothLEDeviceDisplay FindBluetoothLEDeviceDisplay(string id)
+        private DeviceModel FindBluetoothLEDeviceDisplay(string id)
         {
-            foreach (BluetoothLEDeviceDisplay bleDeviceDisplay in ResultCollection)
+            foreach (DeviceModel bleDeviceDisplay in ResultCollection)
             {
                 if (bleDeviceDisplay.Id == id)
                 {
@@ -149,7 +158,7 @@ namespace Microbit.UWP.ViewModels
                 // Protect against race condition if the task runs after the app stopped the deviceWatcher.
                 if (sender == deviceWatcher)
                 {
-                    BluetoothLEDeviceDisplay bleDeviceDisplay = FindBluetoothLEDeviceDisplay(args.Id);
+                    DeviceModel bleDeviceDisplay = FindBluetoothLEDeviceDisplay(args.Id);
                     if (bleDeviceDisplay != null)
                     {
                         bleDeviceDisplay.Update(args);
@@ -168,7 +177,7 @@ namespace Microbit.UWP.ViewModels
                     // Make sure device name isn't blank or already present in the list.
                     if (deviceInfo.Name != string.Empty && FindBluetoothLEDeviceDisplay(deviceInfo.Id) == null)
                     {
-                        ResultCollection.Add(new BluetoothLEDeviceDisplay(deviceInfo));
+                        _resultCollection.Add(new DeviceModel(deviceInfo));
                     }
                 }
             });
