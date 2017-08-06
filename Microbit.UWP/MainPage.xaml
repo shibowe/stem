@@ -7,81 +7,41 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
     <Page.Resources>
-        <DataTemplate x:Key="ComboBoxItemTemplate">
-            <TextBlock Margin="0,0,10,0" Text="{Binding Path=DisplayName}" />
-        </DataTemplate>
-        <DataTemplate x:Key="ResultsListViewTemplate">
-            <Grid Margin="5">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="*" MinWidth="100"/>
-                </Grid.ColumnDefinitions>
-                <Border Grid.Column="0" Height="40" Width="40" Margin="5" VerticalAlignment="Top">
-                    <Image Source="{Binding Path=GlyphBitmapImage}"
-                           Stretch="UniformToFill"/>
-                </Border>
-                <Border Grid.Column="1" Margin="5">
-                    <StackPanel>
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="Name:" Margin="0,0,5,0"/>
-                            <TextBlock Text="{Binding Path=Name}" FontWeight="Bold" TextWrapping="WrapWholeWords"/>
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="Id:" Margin="0,0,5,0"/>
-                            <TextBlock Text="{Binding Path=Id}" TextWrapping="Wrap"/>
-                        </StackPanel>
-                    </StackPanel>
-                </Border>
-            </Grid>
-        </DataTemplate>
+
     </Page.Resources>
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-
-        <TextBlock x:Name="tblURITitle" Margin="24,24,12,12" FontSize="16.666"  Text="Azure认知服务:"/>
-        <StackPanel Grid.Row="1" Margin="24,0,0,0" Orientation="Horizontal">
-            <Button x:Name="btnInvokeAPI" 
-                    Margin="6,0" 
-                    Click="BtnInvokeAPI_Click"
-                    Content="选择图片并识别" />
-            <TextBlock x:Name="tblResultsTitle" Margin="24,6" FontSize="16.666" Text="识别结果:"/>
-            <TextBlock x:Name="tblResults" Foreground="Green" TextWrapping="Wrap" Margin="0,6"  Text="" />
+        <StackPanel Style="{StaticResource MainPageHeaderStyle}">
+            <TextBlock x:Name="tblHeaderTitle" Text="发现设备" Style="{StaticResource MainPageHeaderTitleStyle}"/>
         </StackPanel>
-        <Border BorderBrush="AntiqueWhite" Grid.Row="2" Background="#F3F3F3" Margin="12"  BorderThickness="1"/>
-
-        <TextBlock x:Name="tblBluetoothLETitle" Grid.Row="3" Margin="24,12" FontSize="16.666" Text="蓝牙设备列表(选中即可配对):"/>
-        <StackPanel Grid.Row="4" Margin="24,6" Orientation="Horizontal">
-            <ComboBox x:Name="selectorComboBox" 
-                              Margin="6,0,0,5"
-                              HorizontalAlignment="Left" 
-                              ItemTemplate="{StaticResource ComboBoxItemTemplate}"
-                              ItemsSource="{Binding}" />
-            <Button x:Name="BtnDevicePicker" 
-                    Click="BtnDevicePicker_Click"
-                    Margin="6,0"
-                    Content="搜索设备"/>
-            <Button x:Name="BtnUnpairDevice"
-                    Click="BtnUnpairDevice_Click"
-                    Content="取消配对"/>
-        </StackPanel>
-
-        <Border BorderBrush="AntiqueWhite" Background="#F3F3F3" Grid.Row="5" BorderThickness="1">
-            <ListView x:Name="resultsListView"
-                      IsEnabled="True"
-                      SelectionChanged="resultsListView_SelectionChanged"
-                                  ItemTemplate="{StaticResource ResultsListViewTemplate}"
-                                  ItemsSource="{Binding Path=ResultCollection}">
-            </ListView>
-        </Border>
+        <ListView x:Name="lvDevices"
+                  Grid.Row="1"
+                  Style="{StaticResource MainPageDeviceListStyle}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <StackPanel Orientation="Horizontal">
+                            <FontIcon FontFamily="{StaticResource IconFont}" Glyph="&#xe601;" />
+                            <StackPanel Style="{StaticResource MainPageDeviceListInfoStyle}">
+                                <TextBlock x:Name="tblDeviceName" Style="{StaticResource NormalTextBlockStyle}" Text="test device"/>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock x:Name="tblDevicePaired" Style="{StaticResource NormalTextBlockStyle}"  Text="未配对"/>
+                                    <TextBlock x:Name="tblDeviceConnected" Style="{StaticResource NormalTextBlockStyle}" Text="未链接"/>
+                                </StackPanel>
+                            </StackPanel>
+                        </StackPanel>
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
     </Grid>
 </Page>

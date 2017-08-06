@@ -3,3 +3,6 @@
 ################################################################################
 
 /Microbit.UWP/obj
+/Microbit.UWP/bin/x86/Debug
+/Microbit.UWP/bin/ARM/Debug
+/Microbit.UWP/bin/ARM/Debug

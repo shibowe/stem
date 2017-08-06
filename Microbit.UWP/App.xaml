@@ -6,16 +6,44 @@
     RequestedTheme="Light">
 
     <Application.Resources>
+
         <ResourceDictionary>
-            <Style x:Key="PairedPageTitleStyle" TargetType="TextBlock">
-                <Setter Property="Margin" Value="24"/>
+            <!--  图标字体  -->
+            <FontFamily x:Key="IconFont">/Assets/iconfont.ttf#iconfont</FontFamily>
+            
+            <Color x:Key="MainAccentColor">#46549E</Color>
+            <Color x:Key="NormalTextColor">#FFF2F2F2</Color>
+            <SolidColorBrush x:Key="MainColorBrush" Color="{ThemeResource MainAccentColor}" />
+
+            <Style x:Key="MainPageHeaderStyle" TargetType="StackPanel">
+                <Setter Property="Background" Value="{ThemeResource MainColorBrush}"/>
+                <Setter Property="MinHeight" Value="160"/>
+                <Setter Property="Padding" Value="24"/>
+            </Style>
+            <Style x:Key="MainPageHeaderTitleStyle" TargetType="TextBlock">
+                <Setter Property="Foreground" Value="White"/>
+                <Setter Property="Margin" Value="0,110,0,0"/>
+                <Setter Property="FontSize" Value="20.666"/>
             </Style>
 
-            <Style x:Key="PairedPageDeviceNameStyle" TargetType="Button">
-                <Setter Property="Height" Value="25"/>
-                <Setter Property="Width" Value="225"/>
-                <Setter Property="Margin" Value="24,0"/>
+            <Style x:Key="MainPageDeviceListStyle" TargetType="ListView">
+                <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Hidden"/>
+                <Setter Property="ScrollViewer.HorizontalScrollMode" Value="Enabled"/>
+                <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Hidden"/>
+                <Setter Property="ScrollViewer.VerticalScrollMode" Value="Disabled"/>
+                <Setter Property="ShowsScrollingPlaceholders" Value="False"/>
+                <Setter Property="IsItemClickEnabled" Value="False"/>
+                <Setter Property="AutomationProperties.Name" Value="Raw"/>
+                <Setter Property="Margin" Value="24,12"/>
             </Style>
+            <Style x:Key="MainPageDeviceListInfoStyle" TargetType="StackPanel">
+                <Setter Property="Orientation" Value="Vertical"/>
+            </Style>
+
+            <Style x:Name="NormalTextBlockStyle" TargetType="TextBlock">
+                <Setter Property="Foreground" Value="{ThemeResource NormalTextColor}"/>
+            </Style>
+            
         </ResourceDictionary>
     </Application.Resources>
 </Application>

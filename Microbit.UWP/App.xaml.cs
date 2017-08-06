@@ -15,6 +15,8 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
+using Microbit.UWP.Services;
+
 namespace Microbit.UWP
 {
     /// <summary>
@@ -54,6 +56,8 @@ namespace Microbit.UWP
                 {
                     //TODO: Load state from previously suspended application
                 }
+
+                AppUIService.ShowStatusBar();
 
                 // Place the frame in the current Window
                 Window.Current.Content = rootFrame;
