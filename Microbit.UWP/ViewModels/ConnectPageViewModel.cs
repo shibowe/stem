@@ -20,5 +20,7 @@ namespace Microbit.UWP.ViewModels
             _dialogService = dialogService;
             _navigate = navigation;
         }
+
+
     }
 }
