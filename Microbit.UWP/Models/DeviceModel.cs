@@ -9,8 +9,8 @@ namespace Microbit.UWP.Models
     public class DeviceModel
     {
         public string DeviceName { get; set; }
-        public string DeviceStatus { get; set; }
-        public string DeviceConnect { get; set; }
+        public string PairStatus { get; set; }
+        public string ConnectStatus { get; set; }
 
     }
 }

@@ -16,6 +16,7 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
 using Microbit.UWP.Services;
+using GalaSoft.MvvmLight.Threading;
 
 namespace Microbit.UWP
 {
@@ -57,6 +58,7 @@ namespace Microbit.UWP
                     //TODO: Load state from previously suspended application
                 }
 
+                DispatcherHelper.Initialize();
                 AppUIService.ShowStatusBar();
                 AppUIService.ShowTitleBar();
 

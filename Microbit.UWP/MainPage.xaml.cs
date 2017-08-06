@@ -26,6 +26,7 @@ using Windows.UI.Core;
 using Windows.Devices.Bluetooth;
 using Windows.Devices.Bluetooth.GenericAttributeProfile;
 
+using Microbit.UWP.Models;
 using Microbit.UWP.Services;
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
@@ -36,11 +37,6 @@ namespace Microbit.UWP
     /// </summary>
     public sealed partial class MainPage : Page
     {
-        public ObservableCollection<DeviceInformationDisplay> ResultCollection
-        {
-            get;
-            private set;
-        }
 
         public MainPage()
         {
@@ -53,7 +49,16 @@ namespace Microbit.UWP
         }
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+            SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = AppViewBackButtonVisibility.Collapsed;
 
+        }
+        protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)
+        {
+            SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = Frame.CanGoBack
+              ? AppViewBackButtonVisibility.Visible
+              : AppViewBackButtonVisibility.Collapsed;
+
+            base.OnNavigatingFrom(e);
         }
 
         #region Emotion API

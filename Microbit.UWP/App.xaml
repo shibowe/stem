@@ -26,6 +26,13 @@
                 <Setter Property="FontSize" Value="20.666"/>
             </Style>
 
+            <Style x:Key="MainPageContentStyle" TargetType="ScrollViewer">
+                <Setter Property="VerticalScrollMode" Value="Auto"/>
+                <Setter Property="VerticalScrollBarVisibility" Value="Hidden"/>
+                <Setter Property="BorderBrush" Value="AntiqueWhite"/>
+                <Setter Property="BorderThickness" Value="1"/>
+            </Style>
+
             <Style x:Key="MainPageDeviceListStyle" TargetType="ListView">
                 <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Hidden"/>
                 <Setter Property="ScrollViewer.HorizontalScrollMode" Value="Enabled"/>
@@ -43,7 +50,8 @@
             <Style x:Name="NormalTextBlockStyle" TargetType="TextBlock">
                 <Setter Property="Foreground" Value="{ThemeResource NormalTextColor}"/>
             </Style>
-            
+
+            <vm:ViewModelLocator x:Key="Locator" xmlns:vm="using:Microbit.UWP.ViewModels"/>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

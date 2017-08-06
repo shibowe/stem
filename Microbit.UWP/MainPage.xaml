@@ -5,6 +5,8 @@
     xmlns:local="using:Microbit.UWP"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:Interactivity="using:Microsoft.Xaml.Interactivity"
+    DataContext="{Binding MPVM,Source={StaticResource Locator}}"
     mc:Ignorable="d">
     <Page.Resources>
 
@@ -19,29 +21,39 @@
         <StackPanel Style="{StaticResource MainPageHeaderStyle}">
             <TextBlock x:Name="tblHeaderTitle" Text="发现设备" Style="{StaticResource MainPageHeaderTitleStyle}"/>
         </StackPanel>
-        <ListView x:Name="lvDevices"
-                  Grid.Row="1"
+        <ScrollViewer Grid.Row="1" Style="{StaticResource MainPageContentStyle}">
+            <ListView x:Name="lvDevices"
+                      ItemsSource="{Binding ResultCollection,Mode=OneWay}"
                   Style="{StaticResource MainPageDeviceListStyle}">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-                        <StackPanel Orientation="Horizontal">
-                            <FontIcon FontFamily="{StaticResource IconFont}" Glyph="&#xe601;" />
-                            <StackPanel Style="{StaticResource MainPageDeviceListInfoStyle}">
-                                <TextBlock x:Name="tblDeviceName" Style="{StaticResource NormalTextBlockStyle}" Text="test device"/>
-                                <StackPanel Orientation="Horizontal">
-                                    <TextBlock x:Name="tblDevicePaired" Style="{StaticResource NormalTextBlockStyle}"  Text="未配对"/>
-                                    <TextBlock x:Name="tblDeviceConnected" Style="{StaticResource NormalTextBlockStyle}" Text="未链接"/>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <StackPanel Orientation="Horizontal">
+                                <FontIcon FontFamily="{StaticResource IconFont}" Width="48" Height="48" Glyph="&#xe601;" />
+                                <StackPanel Style="{StaticResource MainPageDeviceListInfoStyle}">
+                                    <TextBlock x:Name="tblDeviceName" Style="{StaticResource NormalTextBlockStyle}" Text="{Binding Name,Mode=OneWay}"/>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock x:Name="tblDevicePaired" Style="{StaticResource NormalTextBlockStyle}"  Text="{Binding IsPaired,Mode=OneWay}"/>
+                                        <TextBlock x:Name="tblDeviceConnected" Style="{StaticResource NormalTextBlockStyle}" Text="{Binding IsConnected,Mode=OneWay}"/>
+                                    </StackPanel>
                                 </StackPanel>
                             </StackPanel>
-                        </StackPanel>
-                    </Grid>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </ScrollViewer>
+        <Border x:Name="StatusBorder" Grid.Row="2" Margin="0">
+            <ScrollViewer VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto" MaxHeight="20">
+                <TextBlock x:Name="StatusBlock" FontWeight="Bold" Margin="24,6" 
+                           Text="{Binding StatusContent}"
+                           MaxWidth="{Binding ElementName=lvDevices,Path=ActualWidth}" 
+                           TextWrapping="Wrap"/>
+            </ScrollViewer>
+        </Border>
     </Grid>
 </Page>
