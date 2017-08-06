@@ -56,6 +56,8 @@ namespace Microbit.UWP.ViewModels
 
         #endregion
 
+
+        #region Discovery Bluetooth LE Devices
         private void StartBleDeviceWatcher()
         {
             StatusContent = "开始搜索周边蓝牙设备...";
@@ -182,5 +184,20 @@ namespace Microbit.UWP.ViewModels
                 }
             });
         }
+        #endregion
+
+        private bool isBusy = false;
+        private RelayCommand<object> _getDeviceInfoCommmand;
+        public RelayCommand<object> GetDeviceInfoCommmand => _getDeviceInfoCommmand ?? (
+            _getDeviceInfoCommmand = new RelayCommand<object>((s) =>
+            {
+                GetDeviceInfo(s);
+            }));
+
+        private void GetDeviceInfo(object obj)
+        {
+            var device = obj;
+        }
+
     }
 }

@@ -5,6 +5,7 @@
     xmlns:local="using:Microbit.UWP"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:Core="using:Microsoft.Xaml.Interactions.Core"
     xmlns:Interactivity="using:Microsoft.Xaml.Interactivity"
     DataContext="{Binding MPVM,Source={StaticResource Locator}}"
     mc:Ignorable="d">
@@ -25,6 +26,11 @@
             <ListView x:Name="lvDevices"
                       ItemsSource="{Binding ResultCollection,Mode=TwoWay}"
                   Style="{StaticResource MainPageDeviceListStyle}">
+                <Interactivity:Interaction.Behaviors>
+                    <Core:EventTriggerBehavior EventName="SelectionChanged">
+                        <Core:InvokeCommandAction Command="{Binding GetDeviceInfoCommmand}" CommandParameter="{Binding SelectedItem, ElementName=lvDevices}"/>
+                    </Core:EventTriggerBehavior>
+                </Interactivity:Interaction.Behaviors>
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <Grid>

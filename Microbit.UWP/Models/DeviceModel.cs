@@ -11,8 +11,6 @@ namespace Microbit.UWP.Models
 {
     public class DeviceModel : INotifyPropertyChanged
     {
-        public string DeviceName { get; set; }
-        public string PairStatus { get; set; }
         public string ConnectStatus { get; set; }
         public event PropertyChangedEventHandler PropertyChanged;
 
