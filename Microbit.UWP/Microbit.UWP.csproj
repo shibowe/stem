@@ -98,6 +98,7 @@
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Models\BluetoothLEAttributeModel.cs" />
     <Compile Include="Models\DeviceModel.cs" />
     <Compile Include="Models\EmotionModel.cs" />
     <Compile Include="Models\FaceRectangleModel.cs" />
@@ -114,6 +115,7 @@
     <Compile Include="Services\SensorBase.cs" />
     <Compile Include="Services\SensorUUIDs.cs" />
     <Compile Include="Services\TemperatureSensorService.cs" />
+    <Compile Include="Services\Utilities.cs" />
     <Compile Include="ViewModels\ConnectPageViewModel.cs" />
     <Compile Include="ViewModels\DevicePageViewModel.cs" />
     <Compile Include="ViewModels\MainPageViewModel.cs" />

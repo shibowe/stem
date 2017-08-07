@@ -13,11 +13,60 @@
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <StackPanel Style="{StaticResource MainPageHeaderStyle}">
             <TextBlock x:Name="tblHeaderTitle" Text="{Binding DeviceName,Mode=OneWay}" Style="{StaticResource MainPageHeaderTitleStyle}"/>
         </StackPanel>
+        <StackPanel Grid.Row="1" Margin="24,12" Orientation="Vertical">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock x:Name="tblModuleNum" Style="{StaticResource NormalTextBlockStyle}" Text="ModuleNum:"/>
+                    <TextBlock x:Name="tblModuleNumValue" Style="{StaticResource NormalTextBlockStyle}"  Text="{Binding ModuleNumber}"/>
+                </StackPanel>
+                <StackPanel Grid.Row="1" Orientation="Horizontal">
+                    <TextBlock x:Name="tblFirmwareNum" Style="{StaticResource NormalTextBlockStyle}"  Text="FirmwareNum:"/>
+                    <TextBlock x:Name="tblFirmwareNumValue" Style="{StaticResource NormalTextBlockStyle}"  Text="{Binding FirmwareNumber}"/>
+                </StackPanel>
+                <StackPanel Grid.Row="2" Orientation="Horizontal">
+                    <TextBlock x:Name="tblSerialNum" Style="{StaticResource NormalTextBlockStyle}"  Text="SerialNum:"/>
+                    <TextBlock x:Name="tblSerialNumValue" Style="{StaticResource NormalTextBlockStyle}"  Text="{Binding SerialNumber}"/>
+                </StackPanel>
+            </Grid>
+        </StackPanel>
+        <StackPanel Grid.Row="2" Margin="24,12" Orientation="Vertical">
+            <TextBlock x:Name="tblGattServiceTitle" Text="GATT Services"/>
+            <Border x:Name="border" BorderThickness="1" BorderBrush="Aquamarine"/>
+        </StackPanel>
+        <ScrollViewer Grid.Row="3" Style="{StaticResource MainPageContentStyle}" >
+            <ListView x:Name="lvGattServices" 
+                      ItemsSource="{Binding ServiceCollection,Mode=TwoWay}"
+                      Style="{StaticResource MainPageDeviceListStyle}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <FontIcon FontFamily="{StaticResource IconFont}" Width="48" Height="48" Glyph="&#xe63d;" />
+                            <TextBlock x:Name="tblGattServiceName" Text="{Binding GattServiceName}"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </ScrollViewer>
+        <Border x:Name="StatusBorder" Grid.Row="4" Margin="0">
+            <ScrollViewer VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto" FontSize="10" MaxHeight="20">
+                <TextBlock x:Name="StatusBlock" Margin="24,6" 
+                           Text="{Binding StatusContent}"
+                           MaxWidth="{Binding ElementName=lvDevices,Path=ActualWidth}" 
+                           TextWrapping="Wrap"/>
+            </ScrollViewer>
+        </Border>
     </Grid>
 </Page>

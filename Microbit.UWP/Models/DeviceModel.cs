@@ -28,6 +28,10 @@ namespace Microbit.UWP.Models
         public string IsConnected => ConvertConnected((bool?)DeviceInformation.Properties["System.Devices.Aep.IsConnected"] == true);
         public IReadOnlyDictionary<string, object> Properties => DeviceInformation.Properties;
 
+        public string ModuleNumber = "werwesdfadfdfa";
+        public string FirmwareNumber = "fgadf2324323";
+        public string SerialNumber = "23432423423423";
+
         public void Update(DeviceInformationUpdate deviceInfoUpdate)
         {
             DeviceInformation.Update(deviceInfoUpdate);
