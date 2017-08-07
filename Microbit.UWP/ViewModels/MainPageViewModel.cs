@@ -211,7 +211,12 @@ namespace Microbit.UWP.ViewModels
             isBusy = true;
             StatusContent = "正在配对中,请稍等...";
             // Capture the current selected item in case the user changes it while we are pairing.
-            var bleDeviceDisplay = (obj as ItemClickEventArgs).ClickedItem as Microsoft.Toolkit.Uwp.ObservableBluetoothLEDevice;
+            var selectItem = (obj as ItemClickEventArgs).ClickedItem;
+            if (selectItem == null)
+            {
+                return;
+            }
+            var bleDeviceDisplay = selectItem as Microsoft.Toolkit.Uwp.ObservableBluetoothLEDevice;
 
             if (null != bleDeviceDisplay && !bleDeviceDisplay.IsPaired)
             {
@@ -228,8 +233,10 @@ namespace Microbit.UWP.ViewModels
                     await bleDeviceDisplay.ConnectAsync();
                     var services = bleDeviceDisplay.Services;
 
+                    StatusContent = $"找到 {services.Count} 个服务项目...";
+
                     //Messenger.Default.Send<ObservableBluetoothLEDevice>(bleDeviceDisplay);
-                    _navigate.NavigateTo("DevicePage");
+                    //_navigate.NavigateTo("DevicePage");
                 }
             }
             else
