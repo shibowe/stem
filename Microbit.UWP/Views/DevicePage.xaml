@@ -44,7 +44,7 @@
         </StackPanel>
         <StackPanel Grid.Row="2" Margin="24,12" Orientation="Vertical">
             <TextBlock x:Name="tblGattServiceTitle" Text="GATT Services"/>
-            <Border x:Name="border" BorderThickness="1" BorderBrush="Aquamarine"/>
+            <Border x:Name="border" BorderThickness="0.5" BorderBrush="{ThemeResource MainColorBrush}"/>
         </StackPanel>
         <ScrollViewer Grid.Row="3" Style="{StaticResource MainPageContentStyle}" >
             <ListView x:Name="lvGattServices" 

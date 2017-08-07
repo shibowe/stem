@@ -1,9 +1,7 @@
-﻿
-
-
-using GalaSoft.MvvmLight;
+﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Views;
 using GalaSoft.MvvmLight.Messaging;
+using GalaSoft.MvvmLight.Threading;
 
 using Microbit.UWP.Models;
 using System.Collections.ObjectModel;
@@ -31,11 +29,11 @@ namespace Microbit.UWP.ViewModels
             _dialogService = dialogService;
             _navigate = navigation;
 
-            Messenger.Default.Register<DeviceModel>(this, (obj) =>
-            {
-                DeviceName = obj.Name;
-                InitConnectDevice(obj.Id);
-            });
+            //Messenger.Default.Register<DeviceModel>(this, (obj) =>
+            //{
+            //    DeviceName = obj.Name;
+            //    //InitConnectDevice(obj.Id);
+            //});
 
         }
 
@@ -71,8 +69,11 @@ namespace Microbit.UWP.ViewModels
             {
                 if (!string.IsNullOrEmpty(deviceId))
                 {
-                    // BT_Code: BluetoothLEDevice.FromIdAsync must be called from a UI thread because it may prompt for consent.
-                    bluetoothLeDevice = await BluetoothLEDevice.FromIdAsync(deviceId);
+                    await DispatcherHelper.RunAsync(async () =>
+                    {
+                        // BT_Code: BluetoothLEDevice.FromIdAsync must be called from a UI thread because it may prompt for consent.
+                        bluetoothLeDevice = await BluetoothLEDevice.FromIdAsync(deviceId);
+                    });
                 }
             }
             catch (Exception ex) when ((uint)ex.HResult == 0x800710df)
@@ -94,7 +95,10 @@ namespace Microbit.UWP.ViewModels
             else
             {
                 ClearBluetoothLEDevice();
-                StatusContent = " 连接到设备失败...";
+                await DispatcherHelper.RunAsync(() =>
+                {
+                    StatusContent = " 连接到设备失败...";
+                });
             }
         }
         private void ClearBluetoothLEDevice()

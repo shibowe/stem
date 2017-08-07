@@ -213,7 +213,8 @@ namespace Microbit.UWP.ViewModels
             // Capture the current selected item in case the user changes it while we are pairing.
             var bleDeviceDisplay = obj as DeviceModel;
 
-            if (bleDeviceDisplay.IsPaired.Contains("未配对"))
+            if (null != bleDeviceDisplay &&
+                bleDeviceDisplay.IsPaired.Contains("未配对"))
             {
                 // BT_Code: Pair the currently selected device.
                 DevicePairingResult result = await bleDeviceDisplay.DeviceInformation.Pairing.PairAsync();
