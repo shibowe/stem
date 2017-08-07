@@ -16,6 +16,7 @@ using Microbit.UWP.Services;
 using GalaSoft.MvvmLight.Threading;
 using GalaSoft.MvvmLight.Messaging;
 using Windows.UI.Xaml.Controls;
+using Microsoft.Toolkit.Uwp;
 
 namespace Microbit.UWP.ViewModels
 {
@@ -45,8 +46,8 @@ namespace Microbit.UWP.ViewModels
                 RaisePropertyChanged(nameof(StatusContent));
             }
         }
-        private ObservableCollection<DeviceModel> _resultCollection = new ObservableCollection<DeviceModel>();
-        public ObservableCollection<DeviceModel> ResultCollection
+        private ObservableCollection<ObservableBluetoothLEDevice> _resultCollection = new ObservableCollection<ObservableBluetoothLEDevice>();
+        public ObservableCollection<ObservableBluetoothLEDevice> ResultCollection
         {
             get { return _resultCollection; }
             set
@@ -109,7 +110,7 @@ namespace Microbit.UWP.ViewModels
 
         private async void DeviceWatcher_Stopped(DeviceWatcher sender, object args)
         {
-            await DispatcherHelper.RunAsync(() =>
+            await GalaSoft.MvvmLight.Threading.DispatcherHelper.RunAsync(() =>
             {
                 // We must update the collection on the UI thread because the collection is databound to a UI element.
                 if (sender == deviceWatcher)
@@ -121,7 +122,7 @@ namespace Microbit.UWP.ViewModels
 
         private async void DeviceWatcher_EnumerationCompleted(DeviceWatcher sender, object args)
         {
-            await DispatcherHelper.RunAsync(() =>
+            await GalaSoft.MvvmLight.Threading.DispatcherHelper.RunAsync(() =>
             {
                 // Protect against race condition if the task runs after the app stopped the deviceWatcher.
                 if (sender == deviceWatcher)
@@ -133,21 +134,21 @@ namespace Microbit.UWP.ViewModels
 
         private async void DeviceWatcher_Removed(DeviceWatcher sender, DeviceInformationUpdate args)
         {
-            await DispatcherHelper.RunAsync(() =>
+            await GalaSoft.MvvmLight.Threading.DispatcherHelper.RunAsync(() =>
             {
                 // Find the corresponding DeviceInformation in the collection and remove it.
-                DeviceModel bleDeviceDisplay = FindBluetoothLEDeviceDisplay(args.Id);
+                ObservableBluetoothLEDevice bleDeviceDisplay = FindBluetoothLEDeviceDisplay(args.Id);
                 if (bleDeviceDisplay != null)
                 {
                     ResultCollection.Remove(bleDeviceDisplay);
                 }
             });
         }
-        private DeviceModel FindBluetoothLEDeviceDisplay(string id)
+        private ObservableBluetoothLEDevice FindBluetoothLEDeviceDisplay(string id)
         {
-            foreach (DeviceModel bleDeviceDisplay in ResultCollection)
+            foreach (ObservableBluetoothLEDevice bleDeviceDisplay in ResultCollection)
             {
-                if (bleDeviceDisplay.Id == id)
+                if (bleDeviceDisplay.DeviceInfo.Id == id)
                 {
                     return bleDeviceDisplay;
                 }
@@ -157,15 +158,15 @@ namespace Microbit.UWP.ViewModels
 
         private async void DeviceWatcher_Updated(DeviceWatcher sender, DeviceInformationUpdate args)
         {
-            await DispatcherHelper.RunAsync(() =>
+            await GalaSoft.MvvmLight.Threading.DispatcherHelper.RunAsync(() =>
             {
                 // Protect against race condition if the task runs after the app stopped the deviceWatcher.
                 if (sender == deviceWatcher)
                 {
-                    DeviceModel bleDeviceDisplay = FindBluetoothLEDeviceDisplay(args.Id);
+                    ObservableBluetoothLEDevice bleDeviceDisplay = FindBluetoothLEDeviceDisplay(args.Id);
                     if (bleDeviceDisplay != null)
                     {
-                        bleDeviceDisplay.Update(args);
+                        bleDeviceDisplay.UpdateAsync(args);
                     }
                 }
             });
@@ -173,7 +174,7 @@ namespace Microbit.UWP.ViewModels
 
         private async void DeviceWatcher_Added(DeviceWatcher sender, DeviceInformation deviceInfo)
         {
-            await DispatcherHelper.RunAsync(() =>
+            await GalaSoft.MvvmLight.Threading.DispatcherHelper.RunAsync(() =>
             {
                 // Protect against race condition if the task runs after the app stopped the deviceWatcher.
                 if (sender == deviceWatcher)
@@ -181,7 +182,7 @@ namespace Microbit.UWP.ViewModels
                     // Make sure device name isn't blank or already present in the list.
                     if (deviceInfo.Name != string.Empty && FindBluetoothLEDeviceDisplay(deviceInfo.Id) == null)
                     {
-                        _resultCollection.Add(new DeviceModel(deviceInfo));
+                        _resultCollection.Add(new ObservableBluetoothLEDevice(deviceInfo));
                     }
                 }
             });
@@ -207,25 +208,21 @@ namespace Microbit.UWP.ViewModels
             {
                 return;
             }
-
             isBusy = true;
             StatusContent = "正在配对中,请稍等...";
             // Capture the current selected item in case the user changes it while we are pairing.
-            var bleDeviceDisplay = (obj as ItemClickEventArgs).ClickedItem as DeviceModel;
+            var bleDeviceDisplay = (obj as ItemClickEventArgs).ClickedItem as Microsoft.Toolkit.Uwp.ObservableBluetoothLEDevice;
 
             if (null != bleDeviceDisplay &&
-                bleDeviceDisplay.IsPaired.Contains("未配对"))
+                !bleDeviceDisplay.IsPaired)
             {
                 // BT_Code: Pair the currently selected device.
-                DevicePairingResult result = await bleDeviceDisplay.DeviceInformation.Pairing.PairAsync();
+                DevicePairingResult result = await bleDeviceDisplay.DeviceInfo.Pairing.PairAsync();
+
 
                 StatusContent = $"配对结果 = {result.Status}";
             }
-            else
-            {
-                //Messenger.Default.Send(bleDeviceDisplay);
-                _navigate.NavigateTo("DevicePage", bleDeviceDisplay);
-            }
+            _navigate.NavigateTo("DevicePage", bleDeviceDisplay);
 
             isBusy = false;
         }
