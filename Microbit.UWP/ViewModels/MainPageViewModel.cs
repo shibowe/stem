@@ -202,6 +202,17 @@ namespace Microbit.UWP.ViewModels
                 }
             }));
 
+        private RelayCommand<object> _readBLEDeviceCommand;
+        public RelayCommand<object> ReadBLEDeviceCommand => _readBLEDeviceCommand ?? (
+            _readBLEDeviceCommand = new RelayCommand<object>((s) =>
+            {
+                if (!string.IsNullOrEmpty(s.ToString()))
+                {
+                    var address = s.ToString();
+
+                }
+            }));
+
         private async void GetDeviceInfo(object obj)
         {
             // Do not allow a new Pair operation to start if an existing one is in progress.

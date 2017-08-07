@@ -38,6 +38,10 @@
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
                             <StackPanel Orientation="Horizontal">
                                 <FontIcon FontFamily="{StaticResource IconFont}" Width="48" Height="48" Glyph="&#xe601;" />
                                 <StackPanel Style="{StaticResource MainPageDeviceListInfoStyle}">
@@ -50,6 +54,14 @@
                                     </StackPanel>
                                 </StackPanel>
                             </StackPanel>
+                            <FontIcon FontFamily="{StaticResource IconFont}"
+                                      Grid.Row="0" Grid.Column="1" Width="48" Height="48" Glyph="&#xe611;" >
+                                <Interactivity:Interaction.Behaviors>
+                                    <Core:EventTriggerBehavior EventName="Tapped">
+                                        <Core:InvokeCommandAction Command="{Binding ReadBLEDeviceCommand}" CommandParameter="{Binding BluetoothAddressAsString,Mode=TwoWay}"/>
+                                    </Core:EventTriggerBehavior>
+                                </Interactivity:Interaction.Behaviors>
+                            </FontIcon>
                         </Grid>
                     </DataTemplate>
                 </ListView.ItemTemplate>
