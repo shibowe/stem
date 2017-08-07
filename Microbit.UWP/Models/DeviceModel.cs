@@ -19,14 +19,31 @@ namespace Microbit.UWP.Models
             DeviceInformation = deviceInfoIn;
         }
 
+        public DeviceModel()
+        {
+
+        }
+
+        public string Name { get; set; }
+        public string IsPaired { get; set; }
+        public string IsConnected { get; set; }
+        public string Id { get; set; }
+        public string Sensor { get; set; }
+        public string Temperature { get; set; }
+        public string Humidity { get; set; }
+        public string Pressure { get; set; }
+        public string Battery { get; set; }
+        public string PM2_5 { get; set; }
+        public string PM10 { get; set; }
+        public DateTime Time { get; set; }
 
         public DeviceInformation DeviceInformation { get; private set; }
 
-        public string Id => DeviceInformation.Id;
-        public string Name => DeviceInformation.Name;
-        public string IsPaired => ConvertPaired(DeviceInformation.Pairing.IsPaired);
-        public string IsConnected => ConvertConnected((bool?)DeviceInformation.Properties["System.Devices.Aep.IsConnected"] == true);
-        public IReadOnlyDictionary<string, object> Properties => DeviceInformation.Properties;
+        //public string Id => DeviceInformation.Id;
+        //public string Name => DeviceInformation.Name;
+        //public string IsPaired => ConvertPaired(DeviceInformation.Pairing.IsPaired);
+        //public string IsConnected => ConvertConnected((bool?)DeviceInformation.Properties["System.Devices.Aep.IsConnected"] == true);
+        //public IReadOnlyDictionary<string, object> Properties => DeviceInformation.Properties;
 
         public string ModuleNumber = "werwesdfadfdfa";
         public string FirmwareNumber = "fgadf2324323";
@@ -43,7 +60,7 @@ namespace Microbit.UWP.Models
             OnPropertyChanged("IsConnected");
             OnPropertyChanged("Properties");
         }
-        private string ConvertPaired(bool isPaired)
+        public string ConvertPaired(bool isPaired)
         {
             if (isPaired)
             {
@@ -54,7 +71,7 @@ namespace Microbit.UWP.Models
                 return "未配对,";
             }
         }
-        private string ConvertConnected(bool convert)
+        public string ConvertConnected(bool convert)
         {
             if (convert)
             {
