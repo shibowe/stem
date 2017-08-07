@@ -213,17 +213,33 @@ namespace Microbit.UWP.ViewModels
             // Capture the current selected item in case the user changes it while we are pairing.
             var bleDeviceDisplay = (obj as ItemClickEventArgs).ClickedItem as Microsoft.Toolkit.Uwp.ObservableBluetoothLEDevice;
 
-            if (null != bleDeviceDisplay &&
-                !bleDeviceDisplay.IsPaired)
+            if (null != bleDeviceDisplay && !bleDeviceDisplay.IsPaired)
             {
                 // BT_Code: Pair the currently selected device.
                 DevicePairingResult result = await bleDeviceDisplay.DeviceInfo.Pairing.PairAsync();
-
-
                 StatusContent = $"配对结果 = {result.Status}";
-            }
-            _navigate.NavigateTo("DevicePage", bleDeviceDisplay);
 
+                if (result.Status == DevicePairingResultStatus.Paired ||
+                    result.Status == DevicePairingResultStatus.AlreadyPaired)
+                {
+
+                    StopBleDeviceWatcher();
+
+                    await bleDeviceDisplay.ConnectAsync();
+                    var services = bleDeviceDisplay.Services;
+
+                    //Messenger.Default.Send<ObservableBluetoothLEDevice>(bleDeviceDisplay);
+                    _navigate.NavigateTo("DevicePage");
+                }
+            }
+            else
+            {
+                DeviceUnpairingResult dpResult = await bleDeviceDisplay.DeviceInfo.Pairing.UnpairAsync();
+                if (dpResult.Status == DeviceUnpairingResultStatus.Unpaired)
+                {
+                    StatusContent = "解除匹配成功";
+                }
+            }
             isBusy = false;
         }
         #endregion 

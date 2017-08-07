@@ -54,10 +54,15 @@
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal">
                             <FontIcon FontFamily="{StaticResource IconFont}" Width="48" Height="48" Glyph="&#xe63d;" />
-                            <TextBlock x:Name="tblGattServiceName" Text="{Binding GattServiceName}"/>
+                            <TextBlock x:Name="tblGattServiceName" Text="{Binding Name}"/>
                         </StackPanel>
                     </DataTemplate>
                 </ListView.ItemTemplate>
+                <Interactivity:Interaction.Behaviors>
+                    <Core:EventTriggerBehavior EventName="ItemClick">
+                        <Core:InvokeCommandAction Command="{Binding GetGattCharacteristicsCommand}" CommandParameter="{Binding SelectedItem, ElementName=lvGattServices,Mode=TwoWay}"/>
+                    </Core:EventTriggerBehavior>
+                </Interactivity:Interaction.Behaviors>
             </ListView>
         </ScrollViewer>
         <Border x:Name="StatusBorder" Grid.Row="4" Margin="0">

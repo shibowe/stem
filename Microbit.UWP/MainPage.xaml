@@ -43,8 +43,10 @@
                                 <StackPanel Style="{StaticResource MainPageDeviceListInfoStyle}">
                                     <TextBlock x:Name="tblDeviceName" Style="{StaticResource NormalTextBlockStyle}" Text="{Binding Name,Mode=OneWay}"/>
                                     <StackPanel Orientation="Horizontal">
+                                        <TextBlock Style="{StaticResource NormalTextBlockStyle}" Text="是否配对:"/>
                                         <TextBlock x:Name="tblDevicePaired" Style="{StaticResource NormalTextBlockStyle}"  Text="{Binding IsPaired,Mode=OneWay}"/>
-                                        <TextBlock x:Name="tblDeviceConnected" Style="{StaticResource NormalTextBlockStyle}" Text="{Binding IsConnected,Mode=OneWay}"/>
+                                        <TextBlock Style="{StaticResource NormalTextBlockStyle}" Text=",地址:"/>
+                                        <TextBlock x:Name="tblDeviceConnected" Style="{StaticResource NormalTextBlockStyle}" Text="{Binding BluetoothAddressAsString,Mode=OneWay}"/>
                                     </StackPanel>
                                 </StackPanel>
                             </StackPanel>
