@@ -19,15 +19,6 @@ namespace Microbit.UWP
 {
     public sealed partial class MainPage : Page
     {
-        private static BluetoothLEHelper bluetoothLEHelper;
-        private static ObservableBluetoothLEDevice bleDevice;
-        private static ObservableGattCharacteristics readGattCharacteristics;
-        private static ObservableGattCharacteristics writeGattCharacteristics;
-        private static ObservableGattDeviceService services;
-
-        private ObservableCollection<DeviceModel> ResultCollection = new ObservableCollection<DeviceModel>();
-
-
         public MainPage()
         {
             this.InitializeComponent();
@@ -43,37 +34,8 @@ namespace Microbit.UWP
         }
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            Init();
             SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = AppViewBackButtonVisibility.Collapsed;
             base.OnNavigatedTo(e);
-        }
-
-        private async Task<bool> Init()
-        {
-            bluetoothLEHelper = BluetoothLEHelper.Context;
-            if (BluetoothLEHelper.IsBluetoothLESupported)
-            {
-                bluetoothLEHelper.StartEnumeration();
-                foreach (var bleDevice in bluetoothLEHelper.BluetoothLeDevices)
-                {
-                    if (bleDevice.Name.Contains("Microbit"))
-                    {
-                        ResultCollection.Add(new DeviceModel
-                        {
-                            Name = bleDevice.Name,
-                            IsConnected = new DeviceModel().ConvertPaired(bleDevice.IsConnected),
-                            IsPaired = new DeviceModel().ConvertConnected(bleDevice.IsPaired)
-                        });
-
-                        if (ResultCollection != null && ResultCollection.Count > 0)
-                        {
-                            await bleDevice.ConnectAsync();
-                        }
-                    }
-                }
-            }
-            return bleDevice.IsConnected;
-
         }
 
         #region Emotion API

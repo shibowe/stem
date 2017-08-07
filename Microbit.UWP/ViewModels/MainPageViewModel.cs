@@ -31,7 +31,7 @@ namespace Microbit.UWP.ViewModels
             _dialogService = dialogService;
             _navigate = navigation;
 
-            //StartBleDeviceWatcher();
+            StartBleDeviceWatcher();
         }
         #region Properties
 
