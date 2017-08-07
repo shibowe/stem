@@ -25,8 +25,7 @@
         <ScrollViewer Grid.Row="1" Style="{StaticResource MainPageContentStyle}">
             <ListView x:Name="lvDevices"
                       ItemsSource="{Binding ResultCollection,Mode=TwoWay}"
-                     
-                  Style="{StaticResource MainPageDeviceListStyle}">
+                        Style="{StaticResource MainPageDeviceListStyle}">
                 <Interactivity:Interaction.Behaviors>
                     <Core:EventTriggerBehavior EventName="ItemClick">
                         <Core:InvokeCommandAction Command="{Binding GetDeviceInfoCommmand}" CommandParameter="{Binding SelectedItem, ElementName=lvDevices,Mode=TwoWay}"/>

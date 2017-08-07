@@ -18,16 +18,6 @@ namespace Microbit.UWP.Models
         {
             DeviceInformation = deviceInfoIn;
         }
-
-        public DeviceModel()
-        {
-
-        }
-
-        public string Name { get; set; }
-        public string IsPaired { get; set; }
-        public string IsConnected { get; set; }
-        public string Id { get; set; }
         public string Sensor { get; set; }
         public string Temperature { get; set; }
         public string Humidity { get; set; }
@@ -39,11 +29,11 @@ namespace Microbit.UWP.Models
 
         public DeviceInformation DeviceInformation { get; private set; }
 
-        //public string Id => DeviceInformation.Id;
-        //public string Name => DeviceInformation.Name;
-        //public string IsPaired => ConvertPaired(DeviceInformation.Pairing.IsPaired);
-        //public string IsConnected => ConvertConnected((bool?)DeviceInformation.Properties["System.Devices.Aep.IsConnected"] == true);
-        //public IReadOnlyDictionary<string, object> Properties => DeviceInformation.Properties;
+        public string Id => DeviceInformation.Id;
+        public string Name => DeviceInformation.Name;
+        public string IsPaired => DeviceInformation.Pairing.IsPaired ? "已配对," : "未配对,";
+        public string IsConnected => ((bool?)DeviceInformation.Properties["System.Devices.Aep.IsConnected"] == true) ? "已连接" : "未连接";
+        public IReadOnlyDictionary<string, object> Properties => DeviceInformation.Properties;
 
         public string ModuleNumber = "werwesdfadfdfa";
         public string FirmwareNumber = "fgadf2324323";
@@ -59,28 +49,6 @@ namespace Microbit.UWP.Models
             OnPropertyChanged("IsPaired");
             OnPropertyChanged("IsConnected");
             OnPropertyChanged("Properties");
-        }
-        public string ConvertPaired(bool isPaired)
-        {
-            if (isPaired)
-            {
-                return "已配对,";
-            }
-            else
-            {
-                return "未配对,";
-            }
-        }
-        public string ConvertConnected(bool convert)
-        {
-            if (convert)
-            {
-                return "已连接设备";
-            }
-            else
-            {
-                return "未连接设备";
-            }
         }
         protected void OnPropertyChanged(string name)
         {
