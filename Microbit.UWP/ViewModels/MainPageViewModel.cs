@@ -15,6 +15,7 @@ using Microbit.UWP.Models;
 using Microbit.UWP.Services;
 using GalaSoft.MvvmLight.Threading;
 using GalaSoft.MvvmLight.Messaging;
+using Windows.UI.Xaml.Controls;
 
 namespace Microbit.UWP.ViewModels
 {
@@ -195,7 +196,6 @@ namespace Microbit.UWP.ViewModels
             {
                 if (null != s)
                 {
-
                     GetDeviceInfo(s);
                 }
             }));
@@ -211,7 +211,7 @@ namespace Microbit.UWP.ViewModels
             isBusy = true;
             StatusContent = "正在配对中,请稍等...";
             // Capture the current selected item in case the user changes it while we are pairing.
-            var bleDeviceDisplay = obj as DeviceModel;
+            var bleDeviceDisplay = (obj as ItemClickEventArgs).ClickedItem as DeviceModel;
 
             if (null != bleDeviceDisplay &&
                 bleDeviceDisplay.IsPaired.Contains("未配对"))
@@ -220,14 +220,14 @@ namespace Microbit.UWP.ViewModels
                 DevicePairingResult result = await bleDeviceDisplay.DeviceInformation.Pairing.PairAsync();
 
                 StatusContent = $"配对结果 = {result.Status}";
-
-                isBusy = false;
             }
             else
             {
                 //Messenger.Default.Send(bleDeviceDisplay);
                 _navigate.NavigateTo("DevicePage", bleDeviceDisplay);
             }
+
+            isBusy = false;
         }
         #endregion 
 

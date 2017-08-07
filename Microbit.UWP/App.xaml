@@ -10,7 +10,7 @@
         <ResourceDictionary>
             <!--  图标字体  -->
             <FontFamily x:Key="IconFont">/Assets/iconfont.ttf#iconfont</FontFamily>
-            
+
             <Color x:Key="MainAccentColor">#FF46549E</Color>
             <Color x:Key="NormalTextColor">#FF46549E</Color>
             <SolidColorBrush x:Key="MainColorBrush" Color="{ThemeResource MainAccentColor}" />
@@ -37,7 +37,7 @@
                 <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Hidden"/>
                 <Setter Property="ScrollViewer.VerticalScrollMode" Value="Disabled"/>
                 <Setter Property="ShowsScrollingPlaceholders" Value="False"/>
-                <Setter Property="IsItemClickEnabled" Value="False"/>
+                <Setter Property="IsItemClickEnabled" Value="True"/>
                 <Setter Property="AutomationProperties.Name" Value="Raw"/>
                 <Setter Property="Margin" Value="24,12"/>
             </Style>
