@@ -64,7 +64,7 @@ namespace Microbit.UWP.Views
         }
         public async void InitConnectDevice(string deviceId)
         {
-            ClearBluetoothLEDevice();
+            //ClearBluetoothLEDevice();
             try
             {
                 if (!string.IsNullOrEmpty(deviceId))

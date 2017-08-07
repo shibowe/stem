@@ -29,8 +29,6 @@
             <Style x:Key="MainPageContentStyle" TargetType="ScrollViewer">
                 <Setter Property="VerticalScrollMode" Value="Auto"/>
                 <Setter Property="VerticalScrollBarVisibility" Value="Hidden"/>
-                <Setter Property="BorderBrush" Value="AntiqueWhite"/>
-                <Setter Property="BorderThickness" Value="1"/>
             </Style>
 
             <Style x:Key="MainPageDeviceListStyle" TargetType="ListView">

@@ -225,12 +225,9 @@ namespace Microbit.UWP.ViewModels
             }
             else
             {
-                Messenger.Default.Send(bleDeviceDisplay);
+                //Messenger.Default.Send(bleDeviceDisplay);
                 _navigate.NavigateTo("DevicePage", bleDeviceDisplay);
             }
-
-
-
         }
         #endregion 
 
