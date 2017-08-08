@@ -31,6 +31,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)MicrobitUtils\Services\MicrobitServiceProvider.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MicrobitUtils\Services\ServiceIds.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MicrobitUtils\Services\TemperatureService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\DeviceServicesViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\DevicesViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\DeviceListPage.xaml.cs">
       <DependentUpon>DeviceListPage.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -77,9 +79,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="$(MSBuildThisFileDirectory)ViewModels\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\DeviceListPage.xaml">

@@ -7,14 +7,32 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
+using Microbit.CPA.MicrobitUtils.Services;
+using Microbit.CPA.ViewModels;
+using Plugin.BLE.Abstractions.Contracts;
+
 namespace Microbit.CPA.Views
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class DeviceServicesPage : ContentPage
 	{
-		public DeviceServicesPage ()
+        private DeviceServicesViewModel vm;
+        public DeviceServicesPage (IDevice device)
 		{
 			InitializeComponent ();
-		}
-	}
+            vm = new DeviceServicesViewModel(device);
+            BindingContext = vm;
+
+            ServicesList.ItemSelected += ServicesList_ItemSelected;
+        }
+        async void ServicesList_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+        {
+            if (e.SelectedItem == null)
+                return;
+
+            IMicrobitServiceProvider serviceProvider = e.SelectedItem as IMicrobitServiceProvider;
+            await Navigation.PushAsync(serviceProvider.GetServiceInstance().Page);
+            ((ListView)sender).SelectedItem = null;
+        }
+    }
 }

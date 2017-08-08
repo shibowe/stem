@@ -4,7 +4,39 @@
              x:Class="Microbit.CPA.Views.DeviceListPage">
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Welcome to Xamarin Forms!" />
+            <StackLayout.Padding>
+                <OnPlatform x:TypeArguments="Thickness">
+                    <OnPlatform.iOS>10,20,10,10</OnPlatform.iOS>
+                    <OnPlatform.Android>10,10,10,10</OnPlatform.Android>
+                </OnPlatform>
+            </StackLayout.Padding>
+            <Label Text="Pick your Micro:bit" FontSize="Large" HorizontalTextAlignment="Center" />
+            <ListView
+				x:Name="DevicesList"
+				ItemsSource="{Binding DetectedDevices}"
+				Header="Detected Devices" >
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <TextCell Text="{Binding Name}"
+							Detail="{Binding State}" />
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <StackLayout
+				Orientation="Horizontal" >
+                <Button Text="Re-Scan" Command="{Binding ReScanCommand}" />
+                <Label Text="Scanning for devices"
+					VerticalTextAlignment="Center"
+					FontSize="Medium"
+					IsVisible="{Binding IsScanning}"
+				HorizontalOptions="EndAndExpand" />
+                <ActivityIndicator IsRunning="true"
+					VerticalOptions="Center"
+					IsVisible="{Binding IsScanning}" />
+            </StackLayout>
         </StackLayout>
     </ContentPage.Content>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Name="Instructions" Order="Primary" Priority="0" x:Name="InstructionsButton" />
+    </ContentPage.ToolbarItems>
 </ContentPage>

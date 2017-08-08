@@ -5,6 +5,9 @@ using System.Text;
 
 using Xamarin.Forms;
 
+using Microbit.CPA.Views;
+using Microbit.CPA.Views.ServicePages;
+
 namespace Microbit.CPA
 {
 	public partial class App : Application
@@ -13,8 +16,8 @@ namespace Microbit.CPA
 		{
 			InitializeComponent();
 
-			MainPage = new Microbit.CPA.MainPage();
-		}
+            MainPage = new NavigationPage(new DeviceListPage());
+        }
 
 		protected override void OnStart ()
 		{

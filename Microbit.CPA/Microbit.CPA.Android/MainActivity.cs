@@ -1,5 +1,4 @@
 ﻿using System;
-
 using Android.App;
 using Android.Content.PM;
 using Android.Runtime;
@@ -7,9 +6,13 @@ using Android.Views;
 using Android.Widget;
 using Android.OS;
 
+
+using Xamarin.Forms;
+using Plugin.Permissions;
+
 namespace Microbit.CPA.Droid
 {
-	[Activity (Label = "Microbit.CPA", Icon = "@drawable/icon", Theme="@style/MainTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
+	[Activity (Label = "MicrobitCPA", Icon = "@drawable/icon", Theme="@style/MainTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
 	public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
 	{
 		protected override void OnCreate (Bundle bundle)
@@ -22,6 +25,10 @@ namespace Microbit.CPA.Droid
 			global::Xamarin.Forms.Forms.Init (this, bundle);
 			LoadApplication (new Microbit.CPA.App ());
 		}
-	}
+        public override void OnRequestPermissionsResult(int requestCode, string[] permissions, Permission[] grantResults)
+        {
+            PermissionsImplementation.Current.OnRequestPermissionsResult(requestCode, permissions, grantResults);
+        }
+    }
 }
 
