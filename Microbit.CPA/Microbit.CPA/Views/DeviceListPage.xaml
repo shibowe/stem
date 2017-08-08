@@ -11,7 +11,7 @@
                     <OnPlatform.Android>10,10,10,10</OnPlatform.Android>
                 </OnPlatform>
             </StackLayout.Padding>
-            <Label Text="发现设备" FontSize="Large" HorizontalTextAlignment="Start" />
+            <Label Text="发现设备" FontSize="Medium" HorizontalTextAlignment="Start" />
             <ListView
 				x:Name="DevicesList"
 				ItemsSource="{Binding DetectedDevices}">
