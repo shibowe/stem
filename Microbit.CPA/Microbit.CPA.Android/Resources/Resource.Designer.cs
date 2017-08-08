@@ -3703,6 +3703,9 @@ namespace Microbit.CPA.Droid
 			// aapt resource value: 0x7f090027
 			public const int abc_toolbar_collapse_description = 2131296295;
 			
+			// aapt resource value: 0x7f09003e
+			public const int app_name = 2131296318;
+			
 			// aapt resource value: 0x7f090036
 			public const int appbar_scrolling_view_behavior = 2131296310;
 			
@@ -3711,6 +3714,9 @@ namespace Microbit.CPA.Droid
 			
 			// aapt resource value: 0x7f090038
 			public const int character_counter_pattern = 2131296312;
+			
+			// aapt resource value: 0x7f090040
+			public const int detecteddevice = 2131296320;
 			
 			// aapt resource value: 0x7f090000
 			public const int mr_button_content_description = 2131296256;
@@ -3789,6 +3795,15 @@ namespace Microbit.CPA.Droid
 			
 			// aapt resource value: 0x7f09003d
 			public const int path_password_strike_through = 2131296317;
+			
+			// aapt resource value: 0x7f09003f
+			public const int pickdevice = 2131296319;
+			
+			// aapt resource value: 0x7f090041
+			public const int rescan = 2131296321;
+			
+			// aapt resource value: 0x7f090042
+			public const int scanning = 2131296322;
 			
 			// aapt resource value: 0x7f090028
 			public const int search_menu_title = 2131296296;

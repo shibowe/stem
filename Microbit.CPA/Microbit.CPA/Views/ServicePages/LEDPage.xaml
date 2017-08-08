@@ -11,18 +11,18 @@
                 </OnPlatform>
             </StackLayout.Padding>
             <StackLayout IsVisible="{Binding LedTextCharacteristicAvailable}">
-                <Label Text="Send text to Micro:bit" FontSize="Small" />
+                <Label Text="传输内容到 Micro:bit" FontSize="Small" />
                 <StackLayout Orientation="Horizontal">
                     <Entry x:Name="TextEntry" 
 							Placeholder="Enter text to display"
 							Keyboard="Text"
 							HorizontalOptions="FillAndExpand"
 							Text="{Binding TextToSend, Mode=TwoWay}" />
-                    <Button Text="Display" Command="{Binding SendTextCommand}" />
+                    <Button Text="发送" Command="{Binding SendTextCommand}" />
                 </StackLayout>
             </StackLayout>
             <StackLayout IsVisible="{Binding LedMatrixCharacteristicAvailable}">
-                <Label Text="Flip individual LEDs" FontSize="Small" />
+                <Label Text="点亮单个LEDs测试" FontSize="Small" />
                 <Grid x:Name="LedGrid" RowSpacing="1" ColumnSpacing="1">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*" />

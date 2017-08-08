@@ -4,5 +4,6 @@
     <SelectedDevice>Xiaomi Redmi Note 4</SelectedDevice>
     <DefaultDevice>5.7" Marshmallow %286.0.0%29 XHDPI Phone</DefaultDevice>
     <AndroidDesignerPreferredDevice>Nexus 4</AndroidDesignerPreferredDevice>
+    <ProjectView>ShowAllFiles</ProjectView>
   </PropertyGroup>
 </Project>

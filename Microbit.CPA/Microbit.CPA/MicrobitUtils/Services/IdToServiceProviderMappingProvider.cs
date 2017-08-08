@@ -11,48 +11,48 @@ namespace Microbit.CPA.MicrobitUtils.Services
 		{
 			// Device Information Service
 			{ServiceIds.DeviceInformationServiceId, (service) => new MicrobitServiceProvider(
-				"Device Information Service",
-				"Device name, manufacturer, etc.",
+				"设备信息服务",
+				"获取设备名称、编码、厂商等",
 				ServiceIds.DeviceInformationServiceId,
 				service,
 				DeviceInformationService.GetInstance)},
 
 			// Temperature Service
 			{ServiceIds.TemperatureServiceId, (service) => new MicrobitServiceProvider(
-				"Temperature Service",
-				"Temperature sensor data",
+				"温度测量服务",
+				"温度传感器数据",
 				ServiceIds.TemperatureServiceId,
 				service,
 				TemperatureService.GetInstance)},
 
 			// Accelerometer Service
 			{ServiceIds.AccelerometerServiceId, (service) => new MicrobitServiceProvider(
-				"Accelerometer Service",
-				"X, Y, Z axis acceleration values",
+				"加速度计服务",
+				"X, Y, Z 加速度值",
 				ServiceIds.AccelerometerServiceId,
 				service,
 				AccelerometerService.GetInstance)},
 
 			// Button Service
 			{ServiceIds.ButtonServiceId, (service) => new MicrobitServiceProvider(
-				"Button Service",
-				"A / B button states",
+				"按键服务",
+				"A / B 按键的状态",
 				ServiceIds.ButtonServiceId,
 				service,
 				ButtonService.GetInstance)},
 
 			// Magnetometer Service
 			{ServiceIds.MagnetometerServiceId, (service) => new MicrobitServiceProvider(
-				"Magnetometer Service",
-				"Compass Data",
+				"磁力仪服务",
+				"罗盘数据",
 				ServiceIds.MagnetometerServiceId,
 				service,
 				MagnetometerService.GetInstance)},
 			
 			// Led Service
 			{ServiceIds.LedServiceId, (service) => new MicrobitServiceProvider(
-				"LED Service",
-				"Show text on LED Display",
+				"LED显示服务",
+				"屏幕上显示文本或图形",
 				ServiceIds.LedServiceId,
 				service,
 				LedService.GetInstance)},

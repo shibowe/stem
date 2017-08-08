@@ -23,14 +23,14 @@ namespace Microbit.CPA.ViewModels
 
         public String DeviceName => _microbit.Name;
         public Guid DeviceId => _microbit.Id;
-        public String DeviceConnectionState => _microbit.State.ToString();
+        public String DeviceConnectionState => _microbit.State.ToString() == "Disconnected" ? "未连接" : "已连接";
 
         public Command ToggleConnectionCommand { get; set; }
         public String ToggleConnectionString
         {
             get
             {
-                return _microbit.State == DeviceState.Connected ? "Disconnect" : "Connect";
+                return _microbit.State == DeviceState.Connected ? "断开连接" : "连接设备";
             }
         }
 

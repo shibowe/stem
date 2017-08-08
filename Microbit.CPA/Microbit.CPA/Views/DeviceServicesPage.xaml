@@ -12,12 +12,14 @@
             </StackLayout.Padding>
             <StackLayout Orientation="Horizontal">
                 <StackLayout>
-                    <Label Text="{Binding DeviceId, StringFormat='ID: {0}'}" />
+                    <Label Text="{Binding DeviceId, StringFormat='设备编码: {0}'}" />
                     <Label Text="{Binding DeviceConnectionState}" />
                 </StackLayout>
                 <ActivityIndicator IsRunning="{Binding IsBusy}" HorizontalOptions="EndAndExpand" />
             </StackLayout>
             <Button Text="{Binding ToggleConnectionString}"
+                    BackgroundColor="#46549E"
+                    TextColor="White"
 					Command="{Binding ToggleConnectionCommand}"
 					HorizontalOptions="FillAndExpand" />
             <ListView x:Name="ServicesList"

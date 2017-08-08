@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             Title="Micro:bit CPA"
              x:Class="Microbit.CPA.Views.DeviceListPage">
     <ContentPage.Content>
         <StackLayout>
@@ -10,11 +11,10 @@
                     <OnPlatform.Android>10,10,10,10</OnPlatform.Android>
                 </OnPlatform>
             </StackLayout.Padding>
-            <Label Text="Pick your Micro:bit" FontSize="Large" HorizontalTextAlignment="Center" />
+            <Label Text="发现设备" FontSize="Large" HorizontalTextAlignment="Start" />
             <ListView
 				x:Name="DevicesList"
-				ItemsSource="{Binding DetectedDevices}"
-				Header="Detected Devices" >
+				ItemsSource="{Binding DetectedDevices}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <TextCell Text="{Binding Name}"
@@ -24,8 +24,8 @@
             </ListView>
             <StackLayout
 				Orientation="Horizontal" >
-                <Button Text="Re-Scan" Command="{Binding ReScanCommand}" />
-                <Label Text="Scanning for devices"
+                <Button Text="查找" Command="{Binding ReScanCommand}" />
+                <Label Text="正在查找设备..."
 					VerticalTextAlignment="Center"
 					FontSize="Medium"
 					IsVisible="{Binding IsScanning}"
@@ -37,6 +37,6 @@
         </StackLayout>
     </ContentPage.Content>
     <ContentPage.ToolbarItems>
-        <ToolbarItem Name="Instructions" Order="Primary" Priority="0" x:Name="InstructionsButton" />
+        <ToolbarItem Name="关于CPA" Order="Primary" Priority="0" x:Name="InstructionsButton" />
     </ContentPage.ToolbarItems>
 </ContentPage>

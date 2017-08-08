@@ -12,8 +12,8 @@ namespace Microbit.CPA.MicrobitUtils.Services
 		private static Guid ButtonACharacteristicId = new Guid("E95DDA90251D470AA062FA1922DFA9A8");
 		private static Guid ButtonBCharacteristicId = new Guid("E95DDA91251D470AA062FA1922DFA9A8");
 
-		private ICharacteristic _aButtonCharacteristic = null;
-		private ICharacteristic _bButtonCharacteristic = null;
+		//private ICharacteristic _aButtonCharacteristic = null;
+		//private ICharacteristic _bButtonCharacteristic = null;
 
 		private int _aButton = -1;
 		public int AButton

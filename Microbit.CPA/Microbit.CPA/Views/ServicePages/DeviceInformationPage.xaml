@@ -12,15 +12,15 @@
                             <OnPlatform.Android>10,10,10,10</OnPlatform.Android>
                         </OnPlatform>
                     </StackLayout.Padding>
-                    <Label Text="Model Number" FontSize="Small" />
+                    <Label Text="型号" FontSize="Small" />
                     <Label Text="{Binding ModelNumber}" FontSize="Large" />
                     <Label Text="Serial Number" FontSize="Small" />
                     <Label Text="{Binding SerialNumber}" FontSize="Large" />
-                    <Label Text="Hardware Revision" FontSize="Small" />
+                    <Label Text="硬件版本" FontSize="Small" />
                     <Label Text="{Binding HardwareRevision}" FontSize="Large" />
-                    <Label Text="Firmware Revision" FontSize="Small" />
+                    <Label Text="固件版本" FontSize="Small" />
                     <Label Text="{Binding FirmwareRevision}" FontSize="Large" />
-                    <Label Text="Manufacturer Name" FontSize="Small" />
+                    <Label Text="厂商" FontSize="Small" />
                     <Label Text="{Binding ManufacturerName}" FontSize="Large" />
                 </StackLayout>
             </ScrollView>
