@@ -9,3 +9,5 @@
 /Microbit.CPA/Microbit.CPA.UWP/obj/x86/Debug
 /Microbit.CPA/Microbit.CPA.iOS/obj/iPhone/Debug
 /Microbit.CPA/Microbit.CPA.UWP/obj
+/Microbit.CPA/Microbit.CPA.iOS/obj/iPhoneSimulator/Debug
+/Microbit.CPA/Microbit.CPA.iOS/bin/iPhoneSimulator/Debug
