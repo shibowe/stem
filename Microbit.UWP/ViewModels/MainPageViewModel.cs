@@ -182,7 +182,8 @@ namespace Microbit.UWP.ViewModels
                     // Make sure device name isn't blank or already present in the list.
                     if (deviceInfo.Name != string.Empty && FindBluetoothLEDeviceDisplay(deviceInfo.Id) == null)
                     {
-                        _resultCollection.Add(new ObservableBluetoothLEDevice(deviceInfo));
+                        var bleDevice = new ObservableBluetoothLEDevice(deviceInfo);
+                        _resultCollection.Add(bleDevice);
                     }
                 }
             });
@@ -201,6 +202,17 @@ namespace Microbit.UWP.ViewModels
                 }
             }));
 
+        private RelayCommand<object> _readBLEDeviceCommand;
+        public RelayCommand<object> ReadBLEDeviceCommand => _readBLEDeviceCommand ?? (
+            _readBLEDeviceCommand = new RelayCommand<object>((s) =>
+            {
+                if (!string.IsNullOrEmpty(s.ToString()))
+                {
+                    var address = s.ToString();
+
+                }
+            }));
+
         private async void GetDeviceInfo(object obj)
         {
             // Do not allow a new Pair operation to start if an existing one is in progress.
@@ -211,7 +223,7 @@ namespace Microbit.UWP.ViewModels
             isBusy = true;
             StatusContent = "正在配对中,请稍等...";
             // Capture the current selected item in case the user changes it while we are pairing.
-            var selectItem = (obj as ItemClickEventArgs).ClickedItem;
+            var selectItem = (obj as ItemClickEventArgs) == null ? obj : (obj as ItemClickEventArgs).ClickedItem;
             if (selectItem == null)
             {
                 return;
@@ -222,7 +234,7 @@ namespace Microbit.UWP.ViewModels
             {
                 // BT_Code: Pair the currently selected device.
                 DevicePairingResult result = await bleDeviceDisplay.DeviceInfo.Pairing.PairAsync();
-                StatusContent = $"配对结果 = {result.Status}";
+                StatusContent = $"Pairing Result = {result.Status}";
 
                 if (result.Status == DevicePairingResultStatus.Paired ||
                     result.Status == DevicePairingResultStatus.AlreadyPaired)
@@ -233,7 +245,7 @@ namespace Microbit.UWP.ViewModels
                     await bleDeviceDisplay.ConnectAsync();
                     var services = bleDeviceDisplay.Services;
 
-                    StatusContent = $"找到 {services.Count} 个服务项目...";
+                    StatusContent = $"find  {services.Count}  services...";
 
                     //Messenger.Default.Send<ObservableBluetoothLEDevice>(bleDeviceDisplay);
                     //_navigate.NavigateTo("DevicePage");
