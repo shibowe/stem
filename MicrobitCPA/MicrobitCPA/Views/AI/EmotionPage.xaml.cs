@@ -29,27 +29,34 @@ namespace MicrobitCPA.Views.AI
 
         async void OnTakePhotoButtonClicked(object sender, EventArgs e)
         {
-            await CrossMedia.Current.Initialize();
-
-            // Take photo
-            if (CrossMedia.Current.IsCameraAvailable || CrossMedia.Current.IsTakePhotoSupported)
+            try
             {
-                photo = await CrossMedia.Current.TakePhotoAsync(new StoreCameraMediaOptions
-                {
-                    Name = "emotion.jpg",
-                    PhotoSize = PhotoSize.Small
-                });
+                await CrossMedia.Current.Initialize();
 
-                if (photo != null)
+                // Take photo
+                if (CrossMedia.Current.IsCameraAvailable || CrossMedia.Current.IsTakePhotoSupported)
                 {
-                    image.Source = ImageSource.FromStream(photo.GetStream);
+                    photo = await CrossMedia.Current.TakePhotoAsync(new StoreCameraMediaOptions
+                    {
+                        Name = "emotion.jpg",
+                        PhotoSize = PhotoSize.Small
+                    });
+
+                    if (photo != null)
+                    {
+                        image.Source = ImageSource.FromStream(photo.GetStream);
+                    }
+                }
+                else
+                {
+                    await DisplayAlert("No Camera", "Camera unavailable.", "OK");
                 }
             }
-            else
+            catch (Exception exp)
             {
-                await DisplayAlert("No Camera", "Camera unavailable.", "OK");
+                await DisplayAlert("错误", exp.Message, "OK");
+                throw;
             }
-
             ((Button)sender).IsEnabled = false;
             activityIndicator.IsRunning = true;
 
