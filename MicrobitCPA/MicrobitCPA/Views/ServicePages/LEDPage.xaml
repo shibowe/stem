@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MicrobitCPA.Views.ServicePages.LEDPage">
+    <ContentPage.Content>
+        <StackLayout>
+            <StackLayout.Padding>
+                <OnPlatform x:TypeArguments="Thickness">
+                    <OnPlatform.iOS>10,20,10,10</OnPlatform.iOS>
+                    <OnPlatform.Android>10,10,10,10</OnPlatform.Android>
+                </OnPlatform>
+            </StackLayout.Padding>
+            <StackLayout IsVisible="{Binding LedTextCharacteristicAvailable}">
+                <Label Text="传输内容到 Micro:bit" FontSize="Small" />
+                <StackLayout Orientation="Horizontal">
+                    <Entry x:Name="TextEntry" 
+							Placeholder="仅限属于英文字母或单词"
+							Keyboard="Text"
+							HorizontalOptions="FillAndExpand"
+							Text="{Binding TextToSend, Mode=TwoWay}" />
+                    <Button Text="发送" Command="{Binding SendTextCommand}" />
+                </StackLayout>
+            </StackLayout>
+            <StackLayout IsVisible="{Binding LedMatrixCharacteristicAvailable}">
+                <Label Text="点亮单个LEDs测试" FontSize="Small" />
+                <Grid x:Name="LedGrid" RowSpacing="1" ColumnSpacing="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                </Grid>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
