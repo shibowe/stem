@@ -14,7 +14,7 @@
             <Image x:Name="image" />
             <ActivityIndicator x:Name="activityIndicator" />
             <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
-                <Label Text="Emotion:" />
+                <Label Text="识别出的表情是:" />
                 <Label x:Name="emotionResultLabel" />
             </StackLayout>
         </StackLayout>

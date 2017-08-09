@@ -20,6 +20,8 @@ namespace MicrobitCPA
         public static readonly string TextTranslatorApiKey = "<INSERT_API_KEY_HERE>";
         public static readonly string TextTranslatorEndpoint = "https://api.microsofttranslator.com/v2/http.svc/Translate";
 
+
+        public static readonly string EmotionApiEndpoint = "https://api.cognitive.azure.cn/emotion/v1.0/recognize?";
         public static readonly string EmotionApiKey = "9c1e3b2860d8440c981ff1077c4cb6c2";
 
         public static readonly string AudioFilename = "Todo.wav";
