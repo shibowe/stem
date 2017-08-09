@@ -16,6 +16,7 @@
                     <Entry x:Name="TextEntry" 
 							Placeholder="仅限属于英文字母或单词"
 							Keyboard="Text"
+                            FontSize="Micro"
 							HorizontalOptions="FillAndExpand"
 							Text="{Binding TextToSend, Mode=TwoWay}" />
                     <Button Text="发送" Command="{Binding SendTextCommand}" />
