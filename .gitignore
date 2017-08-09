@@ -11,3 +11,7 @@
 /Microbit.CPA/Microbit.CPA.UWP/obj
 /Microbit.CPA/Microbit.CPA.iOS/obj/iPhoneSimulator/Debug
 /Microbit.CPA/Microbit.CPA.iOS/bin/iPhoneSimulator/Debug
+/MicrobitCPA/MicrobitCPA/obj/Debug
+/MicrobitCPA/MicrobitCPA/bin/Debug
+/MicrobitCPA/MicrobitCPA.Android/obj
+/MicrobitCPA/MicrobitCPA.Android/bin/Debug
