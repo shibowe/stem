@@ -24,6 +24,7 @@ namespace MicrobitCPA.Views.AI
         public EmotionPage()
         {
             InitializeComponent();
+            emotionClient = new EmotionServiceClient(Constants.EmotionApiKey);
         }
 
         async void OnTakePhotoButtonClicked(object sender, EventArgs e)

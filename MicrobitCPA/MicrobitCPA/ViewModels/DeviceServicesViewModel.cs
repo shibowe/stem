@@ -10,6 +10,7 @@ using Plugin.BLE.Abstractions.Contracts;
 using Plugin.BLE.Abstractions.EventArgs;
 using Xamarin.Forms;
 
+using MicrobitCPA.Views.AI;
 
 namespace MicrobitCPA.ViewModels
 {
@@ -46,6 +47,12 @@ namespace MicrobitCPA.ViewModels
             _adapter.DeviceDisconnected += HandleConnectionStateChanged;
             _adapter.DeviceConnectionLost += HandleConnectionStateChanged;
 
+            InvokeAzureServiceCommand = new Command(
+              () =>
+              {
+                  Application.Current.MainPage.Navigation.PushAsync(new EmotionPage());
+              });
+
             ToggleConnectionCommand = new Command(
                 () =>
                 {
@@ -74,6 +81,10 @@ namespace MicrobitCPA.ViewModels
 
             DetectedServices = new ObservableCollection<IMicrobitServiceProvider>();
         }
+
+
+
+        public Command InvokeAzureServiceCommand { get; set; }
 
         public async void Connect()
         {
