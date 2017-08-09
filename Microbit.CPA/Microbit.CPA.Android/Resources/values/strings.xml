@@ -1,9 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
-<resources>
-  <string name="app_name">MicrobitCPA</string>
-  <string name="pickdevice">选择Microbit</string>
-  <string name="detecteddevice">检测设备</string>
-  <string name="rescan">查找</string>
-  <string name="scanning">正在查找设备...</string>
-
-</resources>
