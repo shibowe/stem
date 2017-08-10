@@ -31,11 +31,7 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-            <Button Text="Azure云服务"
-                    BackgroundColor="#46549E"
-                    TextColor="White"
-                    Command="{Binding InvokeAzureServiceCommand}"
-                    HorizontalOptions="FillAndExpand"/>
+           
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

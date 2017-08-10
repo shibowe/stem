@@ -22,6 +22,7 @@
                     <Button Text="发送" Command="{Binding SendTextCommand}" />
                 </StackLayout>
             </StackLayout>
+
             <StackLayout IsVisible="{Binding LedMatrixCharacteristicAvailable}">
                 <Label Text="点亮单个LEDs测试" FontSize="Small" />
                 <Grid x:Name="LedGrid" RowSpacing="1" ColumnSpacing="1">
@@ -41,6 +42,12 @@
                     </Grid.ColumnDefinitions>
                 </Grid>
             </StackLayout>
+            <Button Text="Azure云服务"
+                    x:Name="BtnInvokeAzure"
+                    BackgroundColor="#46549E"
+                    TextColor="White"
+                    Clicked="BtnInvokeAzure_Clicked"
+                    HorizontalOptions="FillAndExpand"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

@@ -24,11 +24,13 @@ namespace MicrobitCPA.Views.AI
         EmotionServiceClient emotionClient;
         MediaFile photo;
 
-        private ICharacteristic _ledTextCharacteristic = null;
+        private LedService _service;
 
-        public EmotionPage()
+        public EmotionPage(LedService service)
         {
             InitializeComponent();
+
+            _service = service;
 
             emotionClient = new EmotionServiceClient(Constants.EmotionApiKey, Constants.EmotionApiEndpoint);
         }
@@ -78,6 +80,8 @@ namespace MicrobitCPA.Views.AI
                         {
                             // Emotions detected are happiness, sadness, surprise, anger, fear, contempt, disgust, or neutral.
                             emotionResultLabel.Text = emotionResult.FirstOrDefault().Scores.ToRankedList().FirstOrDefault().Key;
+
+                            await _service.SendText(emotionResultLabel.Text.Trim());
 
                         }
                         photo.Dispose();

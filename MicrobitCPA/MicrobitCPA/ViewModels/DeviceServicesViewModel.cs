@@ -20,6 +20,8 @@ namespace MicrobitCPA.ViewModels
         private IBluetoothLE _bluetoothLe;
         private IAdapter _adapter;
 
+        private LedService _ledService;
+
         public ObservableCollection<IMicrobitServiceProvider> DetectedServices { get; private set; }
 
         public String DeviceName => _microbit.Name;
@@ -46,12 +48,6 @@ namespace MicrobitCPA.ViewModels
             _adapter.DeviceConnected += HandleConnectionStateChanged;
             _adapter.DeviceDisconnected += HandleConnectionStateChanged;
             _adapter.DeviceConnectionLost += HandleConnectionStateChanged;
-
-            InvokeAzureServiceCommand = new Command(
-              () =>
-              {
-                  Application.Current.MainPage.Navigation.PushAsync(new EmotionPage());
-              });
 
             ToggleConnectionCommand = new Command(
                 () =>
@@ -137,6 +133,7 @@ namespace MicrobitCPA.ViewModels
                 IList<IService> services = await _microbit.GetServicesAsync();
                 foreach (IService service in services)
                 {
+
                     IMicrobitServiceProvider microbitServiceProvider =
                         IdToServiceProviderMappingProvider.ServiceProvider(service);
                     if (microbitServiceProvider != null)
