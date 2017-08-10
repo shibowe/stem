@@ -57,7 +57,7 @@ namespace MicrobitCPA.Views.AI
                 }
                 else
                 {
-                    await DisplayAlert("No Camera", "Camera unavailable.", "OK");
+                    await DisplayAlert("没有找到相机", "相机不可用.", "好的");
                 }
             }
             catch (Exception exp)
@@ -81,7 +81,24 @@ namespace MicrobitCPA.Views.AI
                             // Emotions detected are happiness, sadness, surprise, anger, fear, contempt, disgust, or neutral.
                             emotionResultLabel.Text = emotionResult.FirstOrDefault().Scores.ToRankedList().FirstOrDefault().Key;
 
-                            await _service.SendText(emotionResultLabel.Text.Trim());
+                            var recognizeValue = emotionResultLabel.Text.Trim();
+
+                            await _service.SendText(recognizeValue);
+                            
+                            switch (recognizeValue)
+                            {
+                                case "happiness":
+                                    break;
+                                case "anger":
+                                    break;
+                                case "disgust":
+                                    break;
+                                case "surprise":
+                                    break;
+                                default:
+                                    break;
+                            }
+                         
 
                         }
                         photo.Dispose();
