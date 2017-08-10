@@ -83,22 +83,54 @@ namespace MicrobitCPA.Views.AI
 
                             var recognizeValue = emotionResultLabel.Text.Trim();
 
-                            await _service.SendText(recognizeValue);
-                            
+                            //await _service.SendText(recognizeValue);
+                            //await _service.Clear();
+
                             switch (recognizeValue)
                             {
-                                case "happiness":
+                                case "Happiness":
+                                    await _service.FlipLed(new Tuple<int, int>(0, 1));
+                                    await _service.FlipLed(new Tuple<int, int>(0, 3));
+                                    await _service.FlipLed(new Tuple<int, int>(1, 1));
+                                    await _service.FlipLed(new Tuple<int, int>(1, 3));
+
+                                    await _service.FlipLed(new Tuple<int, int>(3, 0));
+                                    await _service.FlipLed(new Tuple<int, int>(3, 4));
+                                    await _service.FlipLed(new Tuple<int, int>(4, 1));
+                                    await _service.FlipLed(new Tuple<int, int>(4, 2));
+                                    await _service.FlipLed(new Tuple<int, int>(4, 3));
                                     break;
-                                case "anger":
+                                case "Anger":
+                                    await _service.FlipLed(new Tuple<int, int>(0, 1));
+                                    await _service.FlipLed(new Tuple<int, int>(0, 3));
+                                    await _service.FlipLed(new Tuple<int, int>(1, 1));
+                                    await _service.FlipLed(new Tuple<int, int>(1, 3));
+
+                                    await _service.FlipLed(new Tuple<int, int>(3, 1));
+                                    await _service.FlipLed(new Tuple<int, int>(3, 2));
+                                    await _service.FlipLed(new Tuple<int, int>(3, 3))
+                                        ;
+                                    await _service.FlipLed(new Tuple<int, int>(4, 0));
+                                    await _service.FlipLed(new Tuple<int, int>(4, 4));
                                     break;
-                                case "disgust":
+                                case "Disgust":
                                     break;
-                                case "surprise":
+                                case "Surprise":
+                                    await _service.FlipLed(new Tuple<int, int>(1, 0));
+                                    await _service.FlipLed(new Tuple<int, int>(1, 1));
+                                    await _service.FlipLed(new Tuple<int, int>(1, 3));
+                                    await _service.FlipLed(new Tuple<int, int>(1, 4));
+                                    await _service.FlipLed(new Tuple<int, int>(3, 1));
+                                    await _service.FlipLed(new Tuple<int, int>(3, 2));
+                                    await _service.FlipLed(new Tuple<int, int>(3, 3));
+                                    await _service.FlipLed(new Tuple<int, int>(4, 1));
+                                    await _service.FlipLed(new Tuple<int, int>(4, 2));
+                                    await _service.FlipLed(new Tuple<int, int>(4, 3));
                                     break;
                                 default:
                                     break;
                             }
-                         
+
 
                         }
                         photo.Dispose();

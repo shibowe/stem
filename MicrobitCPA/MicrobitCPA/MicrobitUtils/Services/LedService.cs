@@ -109,6 +109,7 @@ namespace MicrobitCPA.MicrobitUtils.Services
         }
         public async Task SendText(string msg)
         {
+
             if (String.IsNullOrEmpty(msg))
                 return;
 
@@ -133,6 +134,22 @@ namespace MicrobitCPA.MicrobitUtils.Services
             {
                 byte[] matrix = await _ledMatrixCharacteristic.ReadAsync();
                 matrix[coordinate.Item1] ^= (byte)(16 >> coordinate.Item2); // 16 = 00010000 in binary
+                await _ledMatrixCharacteristic.WriteAsync(matrix);
+            }
+            finally
+            {
+                IsBusy = false;
+            }
+        }
+        public async Task Clear()
+        {
+            if (IsBusy)
+                return;
+            IsBusy = true;
+            try
+            {
+                byte[] matrix = await _ledMatrixCharacteristic.ReadAsync();
+                matrix= Enumerable.Repeat((byte)0x00, 25).ToArray();
                 await _ledMatrixCharacteristic.WriteAsync(matrix);
             }
             finally

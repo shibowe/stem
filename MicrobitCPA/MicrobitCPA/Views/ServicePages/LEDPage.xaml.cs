@@ -14,8 +14,6 @@ namespace MicrobitCPA.Views.ServicePages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class LEDPage : ContentPage
     {
-        EmotionServiceClient emotionClient;
-        MediaFile photo;
         private LedService _service;
         public LEDPage(LedService service)
         {
@@ -38,7 +36,6 @@ namespace MicrobitCPA.Views.ServicePages
                     LedGrid.Children.Add(b, j, i);
                 }
             }
-            emotionClient = new EmotionServiceClient(Constants.EmotionApiKey, Constants.EmotionApiEndpoint);
         }
         protected override void OnAppearing()
         {
