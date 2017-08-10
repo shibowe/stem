@@ -114,6 +114,14 @@ namespace MicrobitCPA.Views.AI
                                     await _service.FlipLed(new Tuple<int, int>(4, 4));
                                     break;
                                 case "Disgust":
+                                    await _service.FlipLed(new Tuple<int, int>(1, 0));
+                                    await _service.FlipLed(new Tuple<int, int>(1, 1));
+                                    await _service.FlipLed(new Tuple<int, int>(1, 3));
+                                    await _service.FlipLed(new Tuple<int, int>(1, 4));
+                                    await _service.FlipLed(new Tuple<int, int>(3, 1));
+                                    await _service.FlipLed(new Tuple<int, int>(3, 2));
+                                    await _service.FlipLed(new Tuple<int, int>(3, 3));
+                                    await _service.FlipLed(new Tuple<int, int>(4, 2));
                                     break;
                                 case "Surprise":
                                     await _service.FlipLed(new Tuple<int, int>(1, 0));
@@ -128,6 +136,13 @@ namespace MicrobitCPA.Views.AI
                                     await _service.FlipLed(new Tuple<int, int>(4, 3));
                                     break;
                                 default:
+                                    await _service.FlipLed(new Tuple<int, int>(1, 0));
+                                    await _service.FlipLed(new Tuple<int, int>(1, 1));
+                                    await _service.FlipLed(new Tuple<int, int>(1, 3));
+                                    await _service.FlipLed(new Tuple<int, int>(1, 4));
+                                    await _service.FlipLed(new Tuple<int, int>(3, 1));
+                                    await _service.FlipLed(new Tuple<int, int>(3, 2));
+                                    await _service.FlipLed(new Tuple<int, int>(3, 3));
                                     break;
                             }
 
