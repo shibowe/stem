@@ -1,7 +1,7 @@
 {
-  "version": 2,
+  "version": 3,
   "targets": {
-    "UAP,Version=v10.0": {
+    "UAP,Version=v10.0.10586": {
       "cordova-plugin-media-capture.TypeScript.DefinitelyTyped/0.0.5": {
         "type": "package"
       },
@@ -2256,7 +2256,7 @@
         "type": "project"
       }
     },
-    "UAP,Version=v10.0/win10-arm": {
+    "UAP,Version=v10.0.10586/win10-arm": {
       "cordova-plugin-media-capture.TypeScript.DefinitelyTyped/0.0.5": {
         "type": "package"
       },
@@ -4594,7 +4594,7 @@
         "type": "project"
       }
     },
-    "UAP,Version=v10.0/win10-arm-aot": {
+    "UAP,Version=v10.0.10586/win10-arm-aot": {
       "cordova-plugin-media-capture.TypeScript.DefinitelyTyped/0.0.5": {
         "type": "package"
       },
@@ -5237,9 +5237,6 @@
       },
       "runtime.win10-arm-aot.runtime.native.System.IO.Compression/4.0.1": {
         "type": "package",
-        "compile": {
-          "runtimes/win10-arm-aot/lib/netcore50/_._": {}
-        },
         "runtime": {
           "runtimes/win10-arm-aot/lib/netcore50/clrcompression.dll": {}
         }
@@ -6971,7 +6968,7 @@
         "type": "project"
       }
     },
-    "UAP,Version=v10.0/win10-x64": {
+    "UAP,Version=v10.0.10586/win10-x64": {
       "cordova-plugin-media-capture.TypeScript.DefinitelyTyped/0.0.5": {
         "type": "package"
       },
@@ -9318,7 +9315,7 @@
         "type": "project"
       }
     },
-    "UAP,Version=v10.0/win10-x64-aot": {
+    "UAP,Version=v10.0.10586/win10-x64-aot": {
       "cordova-plugin-media-capture.TypeScript.DefinitelyTyped/0.0.5": {
         "type": "package"
       },
@@ -9964,9 +9961,6 @@
       },
       "runtime.win10-x64-aot.runtime.native.System.IO.Compression/4.0.1": {
         "type": "package",
-        "compile": {
-          "runtimes/win10-x64-aot/lib/netcore50/_._": {}
-        },
         "runtime": {
           "runtimes/win10-x64-aot/lib/netcore50/clrcompression.dll": {}
         }
@@ -11704,7 +11698,7 @@
         "type": "project"
       }
     },
-    "UAP,Version=v10.0/win10-x86": {
+    "UAP,Version=v10.0.10586/win10-x86": {
       "cordova-plugin-media-capture.TypeScript.DefinitelyTyped/0.0.5": {
         "type": "package"
       },
@@ -14051,7 +14045,7 @@
         "type": "project"
       }
     },
-    "UAP,Version=v10.0/win10-x86-aot": {
+    "UAP,Version=v10.0.10586/win10-x86-aot": {
       "cordova-plugin-media-capture.TypeScript.DefinitelyTyped/0.0.5": {
         "type": "package"
       },
@@ -14697,9 +14691,6 @@
       },
       "runtime.win10-x86-aot.runtime.native.System.IO.Compression/4.0.1": {
         "type": "package",
-        "compile": {
-          "runtimes/win10-x86-aot/lib/netcore50/_._": {}
-        },
         "runtime": {
           "runtimes/win10-x86-aot/lib/netcore50/clrcompression.dll": {}
         }
@@ -24956,23 +24947,33 @@
       "Xamarin.Forms >= 2.3.4.247",
       "cordova-plugin-media-capture.TypeScript.DefinitelyTyped >= 0.0.5"
     ],
-    "UAP,Version=v10.0": []
+    "UAP,Version=v10.0.10586": []
   },
   "packageFolders": {
     "C:\\Users\\v-jasowe\\.nuget\\packages\\": {}
   },
   "project": {
     "restore": {
-      "projectUniqueName": "C:\\Users\\v-jasowe\\Documents\\GitHub\\stem\\MicrobitCPA\\MicrobitCPA.UWP\\MicrobitCPA.UWP.csproj",
+      "projectUniqueName": "C:\\Users\\v-jasowe\\Source\\Repos\\stem\\MicrobitCPA\\MicrobitCPA.UWP\\MicrobitCPA.UWP.csproj",
       "projectName": "MicrobitCPA.UWP",
-      "projectPath": "C:\\Users\\v-jasowe\\Documents\\GitHub\\stem\\MicrobitCPA\\MicrobitCPA.UWP\\MicrobitCPA.UWP.csproj",
-      "projectJsonPath": "C:\\Users\\v-jasowe\\Documents\\GitHub\\stem\\MicrobitCPA\\MicrobitCPA.UWP\\project.json",
+      "projectPath": "C:\\Users\\v-jasowe\\Source\\Repos\\stem\\MicrobitCPA\\MicrobitCPA.UWP\\MicrobitCPA.UWP.csproj",
+      "projectJsonPath": "C:\\Users\\v-jasowe\\Source\\Repos\\stem\\MicrobitCPA\\MicrobitCPA.UWP\\project.json",
+      "packagesPath": "C:\\Users\\v-jasowe\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\v-jasowe\\Source\\Repos\\stem\\MicrobitCPA\\MicrobitCPA.UWP\\obj\\",
       "projectStyle": "ProjectJson",
+      "configFilePaths": [
+        "C:\\Users\\v-jasowe\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+      ],
+      "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "https://api.nuget.org/v3/index.json": {}
+      },
       "frameworks": {
-        "uap10.0": {
+        "uap10.0.10586": {
           "projectReferences": {
-            "C:\\Users\\v-jasowe\\Documents\\GitHub\\stem\\MicrobitCPA\\MicrobitCPA\\MicrobitCPA.csproj": {
-              "projectPath": "C:\\Users\\v-jasowe\\Documents\\GitHub\\stem\\MicrobitCPA\\MicrobitCPA\\MicrobitCPA.csproj"
+            "C:\\Users\\v-jasowe\\Source\\Repos\\stem\\MicrobitCPA\\MicrobitCPA\\MicrobitCPA.csproj": {
+              "projectPath": "C:\\Users\\v-jasowe\\Source\\Repos\\stem\\MicrobitCPA\\MicrobitCPA\\MicrobitCPA.csproj"
             }
           }
         }
@@ -24987,7 +24988,7 @@
       "Xamarin.Forms": "2.3.4.247"
     },
     "frameworks": {
-      "uap10.0": {}
+      "uap10.0.10586": {}
     },
     "runtimes": {
       "win10-arm": {
